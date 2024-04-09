@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d6e9e88296f84dc59be3d3d36299e9b8" Name="Diagram1">
+        <EntityTypeShape EntityType="RentacarDBModel.Availability" Width="1.5" PointX="7.375" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentacarDBModel.Cars" Width="1.5" PointX="9.625" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentacarDBModel.Clients" Width="1.5" PointX="9.625" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentacarDBModel.Rental" Width="1.5" PointX="11.875" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentacarDBModel.Roles" Width="1.5" PointX="7.375" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentacarDBModel.sysdiagrams" Width="1.5" PointX="11.875" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentacarDBModel.Upkeep" Width="1.5" PointX="9.625" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentacarDBModel.Users" Width="1.5" PointX="7.375" PointY="5.875" IsExpanded="true" />
+        <AssociationConnector Association="RentacarDBModel.FK_Cars_Availability" ManuallyRouted="false" />
+        <AssociationConnector Association="RentacarDBModel.FK_Rental_Cars" ManuallyRouted="false" />
+        <AssociationConnector Association="RentacarDBModel.FK_Upkeep_Cars" ManuallyRouted="false" />
+        <AssociationConnector Association="RentacarDBModel.FK_Rental_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="RentacarDBModel.FK_Users_Roles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
