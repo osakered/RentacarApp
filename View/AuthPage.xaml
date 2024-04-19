@@ -22,14 +22,6 @@
                 <TextBox x:Name="TextBoxUsername" Width="225"/>
                 <TextBlock Text="Пароль" Foreground="#000000" FontFamily="Bahnschrift Light" Margin="0 10 0 0" HorizontalAlignment="Center"/>
                 <PasswordBox x:Name="TextBoxPassword" RenderTransformOrigin="0.5,0.5" Width="225">
-                    <PasswordBox.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="-0.035"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </PasswordBox.RenderTransform>
                 </PasswordBox>
                 <Button x:Name="LoginButton" Content="Войти" FontFamily="Bahnschrift" Background="#cacaca" Click="LoginButton_Click" Margin="0 20 0 0" Height="28" Width="225"/>
             </StackPanel>
