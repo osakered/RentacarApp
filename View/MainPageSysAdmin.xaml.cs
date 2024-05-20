@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RentacarApp.Models;
 using RentacarApp.Pages;
 
 namespace RentacarApp.View
@@ -54,6 +55,11 @@ namespace RentacarApp.View
         private void LogOutButton_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new AuthPage()); // Выход из "аккаунта"
+        }
+
+        private void ActionJournalButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new LogsPage()); // Журнал действий
         }
     }
 }

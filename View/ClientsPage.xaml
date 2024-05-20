@@ -5,10 +5,70 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:RentacarApp.View"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="ClientsPage">
+      d:DesignHeight="550" d:DesignWidth="750"
+      Title="Клиенты">
 
-    <Grid>
-        
+    <Grid Background="#f5f5f5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Grid.Column="0" Background="#ebebeb">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Rentacar - Аренда Автомобилей" FontSize="25px" FontFamily="Bahnschrift" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <TextBlock Text="Клиенты" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+        <UniformGrid Grid.Row="1" Columns="2">
+            <StackPanel>
+                <Grid Height="auto" Width="auto">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Label FontSize="25px" FontFamily="Bahnschrift" Content="Список клиентов"/>
+                    </StackPanel>
+                    <DataGrid x:Name="DataGridClients" Grid.Row="2" AutoGenerateColumns="False" IsEnabled="True" IsReadOnly="True" FontFamily="Bahnschrift Light">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID Клиента" Binding="{Binding IDClients}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Адрес" Binding="{Binding Address}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="№ паспорта" Binding="{Binding PassportData}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="№ вод. уд." Binding="{Binding DLicenseNumber}" Width="*"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </StackPanel>
+            <StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="423"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="340">
+                        <TextBlock Text="Адрес:" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
+                        <TextBox Text="{Binding Address}" x:Name="AddressTextBox" Height="auto"/>
+                        <TextBlock Text="Паспортные данные:" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
+                        <TextBox Text="{Binding PassportData}" x:Name="PassportDataTextBox" Height="auto"/>
+                        <TextBlock Text="ФИО:" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
+                        <TextBox Text="{Binding FullName}" x:Name="FullNameTextBox" Height="auto" />
+                        <TextBlock Text="Номер водительского удостоверения" FontSize="18px" FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
+                        <TextBox Text="{Binding DLicenseNumber}" x:Name="DLicenseNumberTextBox" Height="auto" MinHeight="15"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
+                        <UniformGrid Columns="4">
+                            <Button x:Name="AddButton" Click="AddButton_Click" Background="#cacaca" FontSize="10" Content="Добавить"/>
+                            <Button x:Name="EditButton" Click="EditButton_Click" Background="#cacaca" FontSize="10" Content="Редактировать"/>
+                            <Button x:Name="DeleteButton" Click="DeleteButton_Click" Background="#d6a7a7" FontSize="10" Content="Удалить"/>
+                            <Button x:Name="BackButton" Click="BackButton_Click" Background="#cacaca" FontSize="10" Content="Назад"/>
+                        </UniformGrid>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </UniformGrid>
+        <StackPanel Background="#ebebeb" Grid.Row="2" Height="auto"></StackPanel>
     </Grid>
 </Page>

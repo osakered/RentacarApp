@@ -37,10 +37,12 @@
         <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Image Source="\Assets\LogoCar.png" Width="auto" Height="auto" MaxWidth="550"/>
         </StackPanel>
-        <StackPanel Grid.Row="3"  VerticalAlignment="Center" HorizontalAlignment="Right">
+        <UniformGrid Columns="2" Grid.Row="3">
+            <Button x:Name="ActionJournalButton" Click="ActionJournalButton_Click" 
+                    Content="Журнал Действий"  Width="120px" Margin="0 0 -850 0" Background="#cacaca" FontFamily="Bahnschrift" Height="auto"/>
             <Button x:Name="LogOut" Click="LogOutButton_Click" 
-                    Content="Выход"  Width="70px" Background="#d6a7a7" FontFamily="Bahnschrift" Height="auto"/>
-        </StackPanel>
+                    Content="Выход"  Width="70px" Margin="0 0 -300 0" Background="#d6a7a7" FontFamily="Bahnschrift" Height="auto"/>
+        </UniformGrid>
         <StackPanel Grid.Row="4" Background="#ebebeb">
         </StackPanel>
     </Grid>

@@ -9,7 +9,7 @@
         Height="550" Width="750">
     <Grid>
         <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" ContentRendered="MainFrame_ContentRendered">
-
+            
         </Frame>
     </Grid>
 </Window>

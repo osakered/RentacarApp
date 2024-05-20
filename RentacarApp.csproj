@@ -64,11 +64,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\CarsVM.cs" />
+    <Compile Include="ViewModel\ClientsVM.cs" />
+    <Compile Include="ViewModel\RentalVM.cs" />
+    <Compile Include="ViewModel\UpkeepVM.cs" />
+    <Compile Include="ViewModel\UsersVM.cs" />
     <Compile Include="View\CarsPage.xaml.cs">
       <DependentUpon>CarsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ClientsPage.xaml.cs">
       <DependentUpon>ClientsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LogsPage.xaml.cs">
+      <DependentUpon>LogsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainPageDirector.xaml.cs">
       <DependentUpon>MainPageDirector.xaml</DependentUpon>
@@ -112,6 +120,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ClientsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LogsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -221,15 +233,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Assets\AuthCar.png" />
     <Resource Include="Assets\CarSilhouette.png" />
     <Resource Include="Assets\MPageCars.png" />
     <Resource Include="Assets\ico.png" />
     <Resource Include="Assets\LogoCar.png" />
+    <Content Include="Assets\Scripts\RentacarDB.sql" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>

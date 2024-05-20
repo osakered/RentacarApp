@@ -5,10 +5,70 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:RentacarApp.View"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="UpkeepPage">
+      d:DesignHeight="550" d:DesignWidth="750"
+      Title="Обслуживание">
 
-    <Grid>
-        
+    <Grid Background="#f5f5f5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Grid.Column="0" Background="#ebebeb">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Rentacar - Аренда Автомобилей" FontSize="25px" FontFamily="Bahnschrift" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <TextBlock Text="Обслуживание" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+        <UniformGrid Grid.Row="1" Columns="2">
+            <StackPanel>
+                <Grid Height="auto" Width="auto">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Label FontSize="25px" FontFamily="Bahnschrift" Content="Список обслуживания авто"/>
+                    </StackPanel>
+                    <DataGrid x:Name="DataGridUpkeep" Grid.Row="2" AutoGenerateColumns="False" IsEnabled="True" IsReadOnly="True" FontFamily="Bahnschrift Light">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID Обслуживания" Binding="{Binding IDUpkeep}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Авто" Binding="{Binding Cars.CarModel}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Начало" Binding="{Binding BeginUpkeepDate}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Конец" Binding="{Binding EndUpkeepDate}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Цена" Binding="{Binding Price}" Width="*"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </StackPanel>
+            <StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="423"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="340">
+                        <TextBlock Text="Автомобиль" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
+                        <ComboBox SelectedItem="{Binding IDCars}" DisplayMemberPath="CarModel" SelectedValuePath="IDCars" x:Name="CarsComboBox"/>
+                        <TextBlock Text="Начало обслуживания" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
+                        <DatePicker Text="{Binding BeginUpkeepDate}" x:Name="BeginUpkeepDatePicker" Height="auto" FontSize="15px" FontFamily="Bahnschrift Light" />
+                        <TextBlock Text="Окончание обслуживания" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
+                        <DatePicker Text="{Binding EndUpkeepDate}" x:Name="EndUpkeepDatePicker" Height="auto" FontSize="15px" FontFamily="Bahnschrift Light" />
+                        <TextBlock Text="Цена" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
+                        <TextBox Text="{Binding Price}" x:Name="PriceTextBox" Height="auto"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
+                        <UniformGrid Columns="4">
+                            <Button x:Name="AddButton" Click="AddButton_Click" Background="#cacaca" FontSize="10" Content="Добавить"/>
+                            <Button x:Name="EditButton" Click="EditButton_Click" Background="#cacaca" FontSize="10" Content="Редактировать"/>
+                            <Button x:Name="DeleteButton" Click="DeleteButton_Click" Background="#d6a7a7" FontSize="10" Content="Удалить"/>
+                            <Button x:Name="BackButton" Click="BackButton_Click" Background="#cacaca" FontSize="10" Content="Назад"/>
+                        </UniformGrid>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </UniformGrid>
+        <StackPanel Background="#ebebeb" Grid.Row="2" Height="auto"></StackPanel>
     </Grid>
 </Page>

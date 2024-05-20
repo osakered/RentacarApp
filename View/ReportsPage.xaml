@@ -8,18 +8,26 @@
       d:DesignHeight="550" d:DesignWidth="750"
       Title="Отчеты">
 
-    <Grid>
-        <!--<DataGrid x:Name="MarksDataGrid" Grid.Row="1" AutoGenerateColumns="False" ColumnWidth="*" IsReadOnly="True"
-               VerticalScrollBarVisibility="Auto" SelectionMode="Single" SelectionChanged="MarksDataGrid_SelectionChanged">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ФИО студента" Binding="{Binding Users.FIO}"/>
-                <DataGridTextColumn Header="Оценка" Binding="{Binding MarkValue}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button Width="200px" Height="30px" Margin="600,420,0,0" Click="SaveClick">Сохранить в виде excel</Button>
-        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
-            <TextBlock Width="100px" Height="20px">Группа:</TextBlock>
-            <ComboBox Name="GroupsComboBox" SelectionChanged="GroupsComboBoxSelectionChanged" Width="100px" Height="20px"></ComboBox>
-        </StackPanel>-->
+    <Grid Background="#f5f5f5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Grid.Column="0" Background="#ebebeb">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Rentacar - Аренда Автомобилей" FontSize="25px" FontFamily="Bahnschrift" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <TextBlock Text="Формирование отчетов" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </StackPanel>
+        </Border>
+        <DataGrid Grid.Row="1"></DataGrid>
+        <StackPanel Grid.Row="3"  VerticalAlignment="Center" HorizontalAlignment="Right">
+            <Button x:Name="BackButton" Click="BackButton_Click" 
+                    Content="Назад"  Width="70px"  Background="#cacaca"  FontFamily="Bahnschrift" Height="auto"/>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Background="#ebebeb">
+        </StackPanel>
     </Grid>
 </Page>

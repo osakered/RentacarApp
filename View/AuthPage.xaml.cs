@@ -22,7 +22,7 @@ namespace RentacarApp.Pages
     /// </summary>
     public partial class AuthPage : Page
     {
-        private readonly RentacarDBEntities db = new RentacarDBEntities();
+        Core db = new Core();
         public AuthPage()
         {
             InitializeComponent(); 
@@ -32,9 +32,9 @@ namespace RentacarApp.Pages
             string username = TextBoxUsername.Text;
             string password = TextBoxPassword.Password;
 
-            if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
+            if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password)) //Проверка заполнения полей
             {
-                Users user = db.Users.FirstOrDefault(u => u.Username == username);  // Поиск пользователя в БД
+                Users user = db.context.Users.FirstOrDefault(u => u.Username == username);  // Поиск пользователя в БД
 
                 if (user != null)
                 {

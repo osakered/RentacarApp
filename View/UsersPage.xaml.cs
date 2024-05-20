@@ -1,5 +1,8 @@
-﻿using System;
+﻿using RentacarApp.Models;
+using RentacarApp.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +23,76 @@ namespace RentacarApp.View
     /// </summary>
     public partial class UsersPage : Page
     {
+        Core db = new Core();
+        int idUser = 0;
         public UsersPage()
         {
             InitializeComponent();
+
+            DataGridUsers.ItemsSource = db.context.Users.ToList(); // Обновление DataGrid
+            RoleComboBox.ItemsSource = db.context.Roles.ToList();
+            RoleComboBox.DisplayMemberPath = "RoleName";
+            RoleComboBox.SelectedValuePath = "IDRole"; // Подключение ComboBox'а к БД
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                UsersVM usersVM = new UsersVM(); //подключение класса
+                bool checker = usersVM.CheckAddUsers(UsernameTextBox.Text, PasswordTextBox.Text, RoleComboBox.SelectedValue); // проверка заполнения полей
+                if (checker)
+                {
+                    usersVM.AddUsers(UsernameTextBox.Text, PasswordTextBox.Text, (int)RoleComboBox.SelectedValue);
+                    MessageBox.Show("Данные о клиенте внесены");
+                    DataGridUsers.ItemsSource = db.context.Users.ToList(); //Добавляет данные о клиентах и обновляет DataGrid
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataGridUsers.SelectedItem != null)
+            {
+                if (MessageBox.Show("Вы уверены что хотите удалить пользователя?",
+                    "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        var selectedUsers = ((Users)DataGridUsers.SelectedItem).IDUsers; //Получение ID выбранного в DataGrid пользователя
+                        idUser = selectedUsers;
+                        UsersVM usersVM = new UsersVM(); //подключение класса
+                        usersVM.DeleteUser(idUser); // вызов метода в классе
+                        MessageBox.Show("Данные о пользователе удалены");
+                    }
+                    catch
+                    {
+                        throw new Exception("Ошибка при удалении данных");
+                    }
+                    DataGridUsers.ItemsSource = db.context.Users.ToList(); // Обновление DataGrid
+                }
+            }
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.NavigationService.CanGoBack)
+            {
+                this.NavigationService.GoBack(); // Возврат на прошлую страницу
+            }
+            else
+            {
+                MessageBox.Show("До этого не было открыто ни одной страницы");
+            }
         }
     }
 }

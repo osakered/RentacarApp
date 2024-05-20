@@ -1,5 +1,8 @@
-﻿using System;
+﻿using RentacarApp.Models;
+using RentacarApp.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +23,77 @@ namespace RentacarApp.View
     /// </summary>
     public partial class RentalPage : Page
     {
+        Core db = new Core();
+        int idRent = 0;
         public RentalPage()
         {
             InitializeComponent();
+
+            DataGridRent.ItemsSource = db.context.Rental.ToList(); //Обновление DataGrid
+            ClientsComboBox.ItemsSource = db.context.Clients.ToList();
+            CarsComboBox.ItemsSource = db.context.Cars.ToList(); // Подключение ComboBox'ов к БД
+            DateStartPicker.Text = DateTime.Now.Date.ToString(); // Выставляет сегодняшнюю дату в DatePicker
+            DateEndPicker.Text = DateTime.Now.Date.AddDays(+1).ToString(); // Выставляет завтрашнюю дату в DatePicker
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                RentalVM RentVM = new RentalVM(); //подключение класса
+                bool checker = RentVM.CheckAddRental(ClientsComboBox.SelectedValue, CarsComboBox.SelectedValue, CostTextBox.Text); // проверка заполнения полей
+                if (checker)
+                {
+                    RentVM.AddRental((int)ClientsComboBox.SelectedValue, (int)CarsComboBox.SelectedValue, CostTextBox.Text, Convert.ToDateTime(DateStartPicker.SelectedDate), Convert.ToDateTime(DateEndPicker.SelectedDate));
+                    MessageBox.Show("Данные об аренде внесены");
+                    DataGridRent.ItemsSource = db.context.Rental.ToList(); //Добавляет данные об аренде и обновляет DataGrid
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataGridRent.SelectedItem != null)
+            {
+                if (MessageBox.Show("Вы уверены что хотите удалить выбранную аренду?",
+                    "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        var selectedRents = ((Rental)DataGridRent.SelectedItem).IDRent; //Получение ID выбранной в DataGrid аренды
+                        idRent = selectedRents;
+                        RentalVM rentVM = new RentalVM(); //подключение класса
+                        rentVM.DeleteRent(idRent); // вызов метода в классе
+                        MessageBox.Show("Данные об аренде удалены");
+                    }
+                    catch
+                    {
+                        throw new Exception("Ошибка при удалении данных аренды");
+                    }
+                    DataGridRent.ItemsSource = db.context.Rental.ToList(); // Обновление DataGrid
+                }
+            }
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.NavigationService.CanGoBack)
+            {
+                this.NavigationService.GoBack(); // Возврат на прошлую страницу
+            }
+            else
+            {
+                MessageBox.Show("До этого не было открыто ни одной страницы");
+            }
         }
     }
 }

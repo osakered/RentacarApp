@@ -28,7 +28,7 @@ namespace RentacarApp
 
             this.MinWidth = 750;
             this.MinHeight = 550; //Устанавливает минимальные и максимальные размеры окна
-            this.MaxWidth = 750; //Например чтобы нельзя было масштабировать эту программу ~(￣▽￣)~*
+            this.MaxWidth = 750; // для отключения масштабирования
             this.MaxHeight = 550;
         }
 
