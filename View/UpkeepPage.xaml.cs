@@ -41,7 +41,7 @@ namespace RentacarApp.View
             try
             {
                 UpkeepVM upkeepVM = new UpkeepVM(); //подключение класса
-                bool checker = upkeepVM.CheckAddUpkeep(CarsComboBox.SelectedValue, PriceTextBox.Text); // проверка заполнения полей
+                bool checker = upkeepVM.CheckUpkeep(CarsComboBox.SelectedValue, PriceTextBox.Text); // проверка заполнения полей
                 if (checker)
                 {
                     upkeepVM.AddUpkeep((int)CarsComboBox.SelectedValue, Convert.ToDateTime(BeginUpkeepDatePicker.SelectedDate), Convert.ToDateTime(EndUpkeepDatePicker.SelectedDate), PriceTextBox.Text);
@@ -57,7 +57,30 @@ namespace RentacarApp.View
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (DataGridUpkeep.SelectedItem != null)
+            {
+                try
+                {
+                    var selectedUpkeep = ((Upkeep)DataGridUpkeep.SelectedItem).IDUpkeep;
+                    idUpkeep = selectedUpkeep;
+                    UpkeepVM upkeepVM = new UpkeepVM(); //подключение класса
+                    bool checker = upkeepVM.CheckUpkeep(CarsComboBox.SelectedValue, PriceTextBox.Text); // проверка заполнения полей
+                    if (checker)
+                    {
+                        upkeepVM.EditUpkeep(idUpkeep, (int)CarsComboBox.SelectedValue, Convert.ToDateTime(BeginUpkeepDatePicker.SelectedDate), Convert.ToDateTime(EndUpkeepDatePicker.SelectedDate), PriceTextBox.Text);
+                        MessageBox.Show("Данные об обслуживании отредактированы");
+                        DataGridUpkeep.ItemsSource = db.context.Upkeep.ToList(); //Добавляет данные об обслуживании и обновляет DataGrid
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Данные для редактирования не выбраны");
+            }
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)

@@ -27,7 +27,7 @@ namespace RentacarApp.ViewModel
             db.context.SaveChanges();
         }
 
-        public bool CheckAddRental(object client, object car, string cost)
+        public bool CheckRental(object client, object car, string cost)
         {
             if (client == null && car == null && String.IsNullOrEmpty(cost))
             {
@@ -59,6 +59,19 @@ namespace RentacarApp.ViewModel
         {
             Rental delRent = db.context.Rental.FirstOrDefault(x => x.IDRent == idRent);
             db.context.Rental.Remove(delRent);
+            db.context.SaveChanges();
+        }
+
+        public void EditRent(int idRent, int idclient, int idcar, string cost, DateTime datestart, DateTime dateend)
+        {
+            Rental editRent = db.context.Rental.FirstOrDefault(x => x.IDRent == idRent);
+
+            editRent.IDClients = idclient;
+            editRent.IDCars = idcar;
+            editRent.Cost = Convert.ToDecimal(cost);
+            editRent.DateStart = datestart;
+            editRent.DateEnd = dateend;
+
             db.context.SaveChanges();
         }
     }

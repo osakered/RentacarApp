@@ -62,12 +62,12 @@ namespace RentacarApp.View
                         CarsVM carsVM = new CarsVM(); //подключение класса
                         carsVM.DeleteCar(idCar); // вызов метода в классе
                         MessageBox.Show("Автомобиль удален");
+                        DataGridCars.ItemsSource = db.context.Cars.ToList(); // Обновление DataGrid
                     }
                     catch 
                     {
                         throw new Exception("Ошибка при удалении авто");
                     }
-                    DataGridCars.ItemsSource = db.context.Cars.ToList(); // Обновление DataGrid
                 }
             }
             else

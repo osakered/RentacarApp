@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace RentacarApp.ViewModel
             db.context.SaveChanges();
         }
 
-        public bool CheckAddClients(string CHKaddress, string CHKpassportdata, string CHKfullname, string CHKdlicensenumber)
+        public bool CheckClients(string CHKaddress, string CHKpassportdata, string CHKfullname, string CHKdlicensenumber)
         {
             if (String.IsNullOrEmpty(CHKaddress) && String.IsNullOrEmpty(CHKpassportdata) && String.IsNullOrEmpty(CHKfullname) && String.IsNullOrEmpty(CHKdlicensenumber))
             {
@@ -58,6 +59,18 @@ namespace RentacarApp.ViewModel
         {
             Clients delClient = db.context.Clients.FirstOrDefault(x => x.IDClients == idClient);
             db.context.Clients.Remove(delClient);
+            db.context.SaveChanges();
+        }
+
+        public void EditClient(int idClients, string address, string passportdata, string fullname, string dlicensenumber)
+        {
+            Clients editClient = db.context.Clients.FirstOrDefault(x => x.IDClients == idClients);
+
+            editClient.Address = address,
+            editClient.PassportData = passportdata,
+            editClient.FullName = fullname,
+            editClient.DLicenseNumber = dlicensenumber;
+
             db.context.SaveChanges();
         }
     }

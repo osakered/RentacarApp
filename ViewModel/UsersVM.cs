@@ -25,7 +25,7 @@ namespace RentacarApp.ViewModel
             db.context.SaveChanges();
         }
 
-        public bool CheckAddUsers(string CHKusername, string CHKpassword, object CHKidrole)
+        public bool CheckUsers(string CHKusername, string CHKpassword, object CHKidrole)
         {
             if (String.IsNullOrEmpty(CHKusername) && String.IsNullOrEmpty(CHKpassword) && CHKidrole == null)
             {
@@ -53,6 +53,17 @@ namespace RentacarApp.ViewModel
         {
             Users delUser = db.context.Users.FirstOrDefault(x => x.IDUsers == idUser);
             db.context.Users.Remove(delUser);
+            db.context.SaveChanges();
+        }
+
+        public void EditUser(int idUser, string username, string password, int idrole)
+        {
+            Users editUsers = db.context.Users.FirstOrDefault(x => x.IDUsers == idUser);
+            
+            editUsers.Username = username,
+            editUsers.Password = password,
+            editUsers.IDRole = idrole;
+
             db.context.SaveChanges();
         }
     }

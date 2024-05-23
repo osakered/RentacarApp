@@ -26,7 +26,7 @@ namespace RentacarApp.ViewModel
             db.context.SaveChanges();
         }
 
-        public bool CheckAddUpkeep(object car, string cost)
+        public bool CheckUpkeep(object car, string cost)
         {
             if (car == null && String.IsNullOrEmpty(cost))
             {
@@ -54,6 +54,18 @@ namespace RentacarApp.ViewModel
         {
             Upkeep delUpkeep = db.context.Upkeep.FirstOrDefault(x => x.IDUpkeep == idUpkeep);
             db.context.Upkeep.Remove(delUpkeep);
+            db.context.SaveChanges();
+        }
+
+        public void EditUpkeep(int idUpkeep, int idcars, DateTime beginupkeepdate, DateTime endupkeepdate, string price)
+        {
+            Upkeep editUpkeep = db.context.Upkeep.FirstOrDefault(x => x.IDUpkeep == idUpkeep);
+
+            editUpkeep.IDCars = idcars,
+            editUpkeep.BeginUpkeepDate = beginupkeepdate,
+            editUpkeep.EndUpkeepDate = endupkeepdate,
+            editUpkeep.Price = Convert.ToDecimal(price)
+
             db.context.SaveChanges();
         }
     }

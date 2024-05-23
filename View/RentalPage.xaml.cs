@@ -41,7 +41,7 @@ namespace RentacarApp.View
             try
             {
                 RentalVM RentVM = new RentalVM(); //подключение класса
-                bool checker = RentVM.CheckAddRental(ClientsComboBox.SelectedValue, CarsComboBox.SelectedValue, CostTextBox.Text); // проверка заполнения полей
+                bool checker = RentVM.CheckRental(ClientsComboBox.SelectedValue, CarsComboBox.SelectedValue, CostTextBox.Text); // проверка заполнения полей
                 if (checker)
                 {
                     RentVM.AddRental((int)ClientsComboBox.SelectedValue, (int)CarsComboBox.SelectedValue, CostTextBox.Text, Convert.ToDateTime(DateStartPicker.SelectedDate), Convert.ToDateTime(DateEndPicker.SelectedDate));
@@ -57,7 +57,30 @@ namespace RentacarApp.View
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (DataGridRent.SelectedItem != null)
+            {
+                try
+                {
+                    var selectedRents = ((Rental)DataGridRent.SelectedItem).IDRent;
+                    idRent = selectedRents;
+                    RentalVM RentVM = new RentalVM(); //подключение класса
+                    bool checker = RentVM.CheckRental(ClientsComboBox.SelectedValue, CarsComboBox.SelectedValue, CostTextBox.Text); // проверка заполнения полей
+                    if (checker)
+                    {
+                        RentVM.EditRent(idRent, (int)ClientsComboBox.SelectedValue, (int)CarsComboBox.SelectedValue, CostTextBox.Text, Convert.ToDateTime(DateStartPicker.SelectedDate), Convert.ToDateTime(DateEndPicker.SelectedDate));
+                        MessageBox.Show("Данные об аренде отредактированы");
+                        DataGridRent.ItemsSource = db.context.Rental.ToList(); //Обновление DataGrid
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Аренда для редактирования не выбран");
+            }
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)

@@ -70,7 +70,30 @@ namespace RentacarApp.View
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (DataGridClients.SelectedItem != null)
+            {
+                try
+                {
+                    var selectedClients = ((Clients)DataGridClients.SelectedItem).IDClients;
+                    idClients = selectedClients;
+                    ClientsVM clientsVM = new ClientsVM(); //подключение класса
+                    bool checker = clientsVM.CheckClients(AddressTextBox.Text, PassportDataTextBox.Text, FullNameTextBox.Text, DLicenseNumberTextBox.Text); // проверка заполнения полей
+                    if (checker)
+                    {
+                        clientsVM.EditClient(idClients, AddressTextBox.Text, PassportDataTextBox.Text, FullNameTextBox.Text, DLicenseNumberTextBox.Text);
+                        MessageBox.Show("Данные о клиенте отредактированы");
+                        DataGridClients.ItemsSource = db.context.Clients.ToList(); //Добавляет данные о клиентах и обновляет DataGrid
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Данные для редактирования не выбраны");
+            }
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
