@@ -28,16 +28,17 @@
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Label FontSize="25px" FontFamily="Bahnschrift" Content="Список обслуживания авто"/>
+                        <Image Source="/Assets/edit.png" Width="20" ToolTip="Нажмите на ячейку для редактирования"></Image>
                     </StackPanel>
-                    <DataGrid x:Name="DataGridUpkeep" Grid.Row="2" AutoGenerateColumns="False" IsEnabled="True" IsReadOnly="True" FontFamily="Bahnschrift Light">
+                    <DataGrid x:Name="DataGridUpkeep" RowEditEnding="DataGridUpkeep_RowEditEnding" Grid.Row="2" AutoGenerateColumns="False" IsEnabled="True"  FontFamily="Bahnschrift Light">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID Обслуживания" Binding="{Binding IDUpkeep}" Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Авто" Binding="{Binding Cars.CarModel}" Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Начало" Binding="{Binding BeginUpkeepDate}" Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Конец" Binding="{Binding EndUpkeepDate}" Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Цена" Binding="{Binding Price}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="ID Обслуживания" IsReadOnly="True" Binding="{Binding IDUpkeep}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Авто" Binding="{Binding Cars.CarModel, UpdateSourceTrigger=PropertyChanged}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Начало" Binding="{Binding BeginUpkeepDate, StringFormat = {}{0:dd/MM/yyyy}, UpdateSourceTrigger=PropertyChanged}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Конец" Binding="{Binding EndUpkeepDate, StringFormat = {}{0:dd/MM/yyyy}, UpdateSourceTrigger=PropertyChanged}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Цена" Binding="{Binding Price, UpdateSourceTrigger=PropertyChanged}" Width="*"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
@@ -59,9 +60,9 @@
                         <TextBox Text="{Binding Price}" x:Name="PriceTextBox" Height="auto"/>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
-                        <UniformGrid Columns="4">
+                        <UniformGrid Columns="3">
                             <Button x:Name="AddButton" Click="AddButton_Click" Background="#cacaca" FontSize="10" Content="Добавить"/>
-                            <Button x:Name="EditButton" Click="EditButton_Click" Background="#cacaca" FontSize="10" Content="Редактировать"/>
+                            <!--<Button x:Name="EditButton" Click="EditButton_Click" Background="#cacaca" FontSize="10" Content="Редактировать"/>-->
                             <Button x:Name="DeleteButton" Click="DeleteButton_Click" Background="#d6a7a7" FontSize="10" Content="Удалить"/>
                             <Button x:Name="BackButton" Click="BackButton_Click" Background="#cacaca" FontSize="10" Content="Назад"/>
                         </UniformGrid>

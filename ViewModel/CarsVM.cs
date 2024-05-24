@@ -64,17 +64,17 @@ namespace RentacarApp.ViewModel
             db.context.SaveChanges();
         }
 
-        public void EditCar(int idCar, string carmodel, DateTime carprodyear, string carcolor, string regnumber, int idavailability) // Редактирование
-        {
-            Cars editCar = db.context.Cars.FirstOrDefault(x => x.IDCars == idCar);
+        //public void EditCar(int idCar, string carmodel, DateTime carprodyear, string carcolor, string regnumber, int idavailability) // Старое редактирование
+        //{
+        //    Cars editCar = db.context.Cars.FirstOrDefault(x => x.IDCars == idCar);
 
-            editCar.CarModel = carmodel;
-            editCar.CarProdYear = carprodyear;
-            editCar.CarColor = carcolor;
-            editCar.RegNumber = regnumber;
-            editCar.IDAvailability = idavailability;
+        //    editCar.CarModel = carmodel;
+        //    editCar.CarProdYear = carprodyear;
+        //    editCar.CarColor = carcolor;
+        //    editCar.RegNumber = regnumber;
+        //    editCar.IDAvailability = idavailability;
             
-            db.context.SaveChanges();
-        }
+        //    db.context.SaveChanges();
+        //}
     }
 }

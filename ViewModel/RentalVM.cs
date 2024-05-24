@@ -62,17 +62,17 @@ namespace RentacarApp.ViewModel
             db.context.SaveChanges();
         }
 
-        public void EditRent(int idRent, int idclient, int idcar, string cost, DateTime datestart, DateTime dateend)
-        {
-            Rental editRent = db.context.Rental.FirstOrDefault(x => x.IDRent == idRent);
+        //public void EditRent(int idRent, int idclient, int idcar, string cost, DateTime datestart, DateTime dateend)
+        //{
+        //    Rental editRent = db.context.Rental.FirstOrDefault(x => x.IDRent == idRent);
 
-            editRent.IDClients = idclient;
-            editRent.IDCars = idcar;
-            editRent.Cost = Convert.ToDecimal(cost);
-            editRent.DateStart = datestart;
-            editRent.DateEnd = dateend;
+        //    editRent.IDClients = idclient;
+        //    editRent.IDCars = idcar;
+        //    editRent.Cost = Convert.ToDecimal(cost);
+        //    editRent.DateStart = datestart;
+        //    editRent.DateEnd = dateend;
 
-            db.context.SaveChanges();
-        }
+        //    db.context.SaveChanges();
+        //}
     }
 }

@@ -28,17 +28,18 @@
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Label FontSize="25px" FontFamily="Bahnschrift" Content="Список автомобилей"/>
+                        <Image Source="/Assets/edit.png" Width="20" ToolTip="Нажмите на ячейку для редактирования"></Image>
                     </StackPanel>
-                    <DataGrid x:Name="DataGridCars" Grid.Row="2" AutoGenerateColumns="False" IsEnabled="True" IsReadOnly="True" FontFamily="Bahnschrift Light" >
+                    <DataGrid x:Name="DataGridCars" RowEditEnding="DataGridCars_RowEditEnding" Grid.Row="2" AutoGenerateColumns="False" IsEnabled="True" FontFamily="Bahnschrift Light" >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID Авто" Binding="{Binding IDCars}" Width="*"></DataGridTextColumn>                            
-                            <DataGridTextColumn Header="Модель" Binding="{Binding CarModel}" Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Год" Binding="{Binding CarProdYear}" Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Цвет" Binding="{Binding CarColor}" Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Госномер" Binding="{Binding RegNumber}" Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Статус" Binding="{Binding Availability.AvailabilityState}" Width="*"></DataGridTextColumn> 
+                            <DataGridTextColumn Header="ID Авто" Binding="{Binding IDCars}" IsReadOnly="True" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Модель" Binding="{Binding CarModel, UpdateSourceTrigger=PropertyChanged}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Год" Binding="{Binding CarProdYear, StringFormat = {}{0:dd/MM/yyyy}, UpdateSourceTrigger=PropertyChanged}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Цвет" Binding="{Binding CarColor, UpdateSourceTrigger=PropertyChanged}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Госномер" Binding="{Binding RegNumber, UpdateSourceTrigger=PropertyChanged}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Статус" Binding="{Binding Availability.AvailabilityState, UpdateSourceTrigger=PropertyChanged}" Width="*"></DataGridTextColumn> 
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
@@ -63,9 +64,9 @@
                                   SelectedValuePath="IDAvailability" x:Name="AvailabilityComboBox"/> 
                     </StackPanel>
                     <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
-                        <UniformGrid Columns="4">
+                        <UniformGrid Columns="3">
                             <Button x:Name="AddButton" Click="AddButton_Click" Background="#cacaca" FontSize="10" Content="Добавить"/>
-                            <Button x:Name="EditButton" Click="EditButton_Click" Background="#cacaca" FontSize="10" Content="Редактировать"/>
+                            <!--<Button x:Name="EditButton" Click="EditButton_Click" Background="#cacaca" FontSize="10" Content="Редактировать"/>-->
                             <Button x:Name="DeleteButton" Click="DeleteButton_Click" Background="#d6a7a7" FontSize="10" Content="Удалить"/>
                             <Button x:Name="BackButton" Click="BackButton_Click" Background="#cacaca" FontSize="10" Content="Назад"/>
                         </UniformGrid>

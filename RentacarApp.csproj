@@ -240,6 +240,7 @@
     <Resource Include="Assets\MPageCars.png" />
     <Resource Include="Assets\ico.png" />
     <Resource Include="Assets\LogoCar.png" />
+    <Resource Include="Assets\edit.png" />
     <Content Include="Assets\Scripts\RentacarDB.sql" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

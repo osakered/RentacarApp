@@ -75,35 +75,6 @@ namespace RentacarApp.View
                 MessageBox.Show("Автомобиль для удаления не выбран");
             }
         }
-
-        private void EditButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (DataGridCars.SelectedItem != null)
-            {
-                try
-                {
-                    var selectedCars = ((Cars)DataGridCars.SelectedItem).IDCars; //Получение ID выбранного в DataGrid авто
-                    idCar = selectedCars;
-                    CarsVM CarVM = new CarsVM(); //подключение класса
-                    bool checker = CarVM.CheckCar(ModelTextBox.Text, ColorTextBox.Text, RegNumberTextBox.Text, AvailabilityComboBox.SelectedValue); // проверка заполнения полей
-                    if (checker)
-                    {
-                        CarVM.EditCar(idCar, ModelTextBox.Text, Convert.ToDateTime(CarProdYearDatePicker.SelectedDate), ColorTextBox.Text, RegNumberTextBox.Text, (int)AvailabilityComboBox.SelectedValue);
-                        MessageBox.Show("Данные об авто отредактированы");
-                        DataGridCars.ItemsSource = db.context.Cars.ToList();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Автомобиль для редактирования не выбран");
-            }
-        }
-
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -122,5 +93,41 @@ namespace RentacarApp.View
                 MessageBox.Show(ex.Message); 
             }
         }
+        private void DataGridCars_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        {
+            if (e.EditAction == DataGridEditAction.Commit)
+            {
+                var EditRow = e.Row.Item as Cars;
+                db.context.Entry(EditRow).State = EntityState.Modified;
+                db.context.SaveChanges(); 
+            }
+        }
+        //private void EditButton_Click(object sender, RoutedEventArgs e) //Старое редактирование, у которого не обновляется DataGrid 
+        //{
+        //    if (DataGridCars.SelectedItem != null)
+        //    {
+        //        try
+        //        {
+        //            var selectedCars = ((Cars)DataGridCars.SelectedItem).IDCars; //Получение ID выбранного в DataGrid авто
+        //            idCar = selectedCars;
+        //            CarsVM CarVM = new CarsVM(); //подключение класса
+        //            bool checker = CarVM.CheckCar(ModelTextBox.Text, ColorTextBox.Text, RegNumberTextBox.Text, AvailabilityComboBox.SelectedValue); // проверка заполнения полей
+        //            if (checker)
+        //            {
+        //                CarVM.EditCar(idCar, ModelTextBox.Text, Convert.ToDateTime(CarProdYearDatePicker.SelectedDate), ColorTextBox.Text, RegNumberTextBox.Text, (int)AvailabilityComboBox.SelectedValue);
+        //                MessageBox.Show("Данные об авто отредактированы");
+        //                DataGridCars.ItemsSource = db.context.Cars.ToList(); // Обновление DataGrid
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show(ex.Message);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Автомобиль для редактирования не выбран");
+        //    }
+        //}
     }
 }

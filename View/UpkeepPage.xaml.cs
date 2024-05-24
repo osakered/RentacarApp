@@ -54,35 +54,6 @@ namespace RentacarApp.View
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void EditButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (DataGridUpkeep.SelectedItem != null)
-            {
-                try
-                {
-                    var selectedUpkeep = ((Upkeep)DataGridUpkeep.SelectedItem).IDUpkeep;
-                    idUpkeep = selectedUpkeep;
-                    UpkeepVM upkeepVM = new UpkeepVM(); //подключение класса
-                    bool checker = upkeepVM.CheckUpkeep(CarsComboBox.SelectedValue, PriceTextBox.Text); // проверка заполнения полей
-                    if (checker)
-                    {
-                        upkeepVM.EditUpkeep(idUpkeep, (int)CarsComboBox.SelectedValue, Convert.ToDateTime(BeginUpkeepDatePicker.SelectedDate), Convert.ToDateTime(EndUpkeepDatePicker.SelectedDate), PriceTextBox.Text);
-                        MessageBox.Show("Данные об обслуживании отредактированы");
-                        DataGridUpkeep.ItemsSource = db.context.Upkeep.ToList(); //Добавляет данные об обслуживании и обновляет DataGrid
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Данные для редактирования не выбраны");
-            }
-        }
-
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             if (DataGridUpkeep.SelectedItem != null)
@@ -118,5 +89,43 @@ namespace RentacarApp.View
                 MessageBox.Show("До этого не было открыто ни одной страницы");
             }
         }
+
+        private void DataGridUpkeep_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        {
+            if (e.EditAction == DataGridEditAction.Commit)
+            {
+                var EditRow = e.Row.Item as Upkeep;
+                db.context.Entry(EditRow).State = EntityState.Modified;
+                db.context.SaveChanges();
+            }
+        }
+
+        //private void EditButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (DataGridUpkeep.SelectedItem != null)
+        //    {
+        //        try
+        //        {
+        //            var selectedUpkeep = ((Upkeep)DataGridUpkeep.SelectedItem).IDUpkeep;
+        //            idUpkeep = selectedUpkeep;
+        //            UpkeepVM upkeepVM = new UpkeepVM(); //подключение класса
+        //            bool checker = upkeepVM.CheckUpkeep(CarsComboBox.SelectedValue, PriceTextBox.Text); // проверка заполнения полей
+        //            if (checker)
+        //            {
+        //                upkeepVM.EditUpkeep(idUpkeep, (int)CarsComboBox.SelectedValue, Convert.ToDateTime(BeginUpkeepDatePicker.SelectedDate), Convert.ToDateTime(EndUpkeepDatePicker.SelectedDate), PriceTextBox.Text);
+        //                MessageBox.Show("Данные об обслуживании отредактированы");
+        //                DataGridUpkeep.ItemsSource = db.context.Upkeep.ToList(); //Добавляет данные об обслуживании и обновляет DataGrid
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show(ex.Message);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Данные для редактирования не выбраны");
+        //    }
+        //}
     }
 }

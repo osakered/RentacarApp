@@ -57,16 +57,16 @@ namespace RentacarApp.ViewModel
             db.context.SaveChanges();
         }
 
-        public void EditUpkeep(int idUpkeep, int idcars, DateTime beginupkeepdate, DateTime endupkeepdate, string price)
-        {
-            Upkeep editUpkeep = db.context.Upkeep.FirstOrDefault(x => x.IDUpkeep == idUpkeep);
+        //public void EditUpkeep(int idUpkeep, int idcars, DateTime beginupkeepdate, DateTime endupkeepdate, string price)
+        //{
+        //    Upkeep editUpkeep = db.context.Upkeep.FirstOrDefault(x => x.IDUpkeep == idUpkeep);
 
-            editUpkeep.IDCars = idcars,
-            editUpkeep.BeginUpkeepDate = beginupkeepdate,
-            editUpkeep.EndUpkeepDate = endupkeepdate,
-            editUpkeep.Price = Convert.ToDecimal(price)
+        //    editUpkeep.IDCars = idcars;
+        //    editUpkeep.BeginUpkeepDate = beginupkeepdate;
+        //    editUpkeep.EndUpkeepDate = endupkeepdate;
+        //    editUpkeep.Price = Convert.ToDecimal(price);
 
-            db.context.SaveChanges();
-        }
+        //    db.context.SaveChanges();
+        //}
     }
 }

@@ -54,34 +54,6 @@ namespace RentacarApp.View
             }
         }
 
-        private void EditButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (DataGridUsers.SelectedItem != null)
-            {
-                try
-                {
-                    var selectedUser = ((Users)DataGridUsers.SelectedItem).IDUsers;
-                    idUser = selectedUser;
-                    UsersVM usersVM = new UsersVM(); //подключение класса
-                    bool checker = usersVM.CheckUsers(UsernameTextBox.Text, PasswordTextBox.Text, RoleComboBox.SelectedValue); // проверка заполнения полей
-                    if (checker)
-                    {
-                        usersVM.EditUser(idUser, UsernameTextBox.Text, PasswordTextBox.Text, (int)RoleComboBox.SelectedValue);
-                        MessageBox.Show("Данные о клиенте внесены");
-                        DataGridUsers.ItemsSource = db.context.Users.ToList(); //Добавляет данные о клиентах и обновляет DataGrid
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Данные для редактирования не выбраны");
-            }
-        }
-
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             if (DataGridUsers.SelectedItem != null)
@@ -117,5 +89,44 @@ namespace RentacarApp.View
                 MessageBox.Show("До этого не было открыто ни одной страницы");
             }
         }
+
+        private void DataGridUsers_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        {
+            if (e.EditAction == DataGridEditAction.Commit)
+            {
+                var EditRow = e.Row.Item as Users;
+                db.context.Entry(EditRow).State = EntityState.Modified;
+                db.context.SaveChanges();
+            }
+        }
+
+        //private void EditButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (DataGridUsers.SelectedItem != null)
+        //    {
+        //        try
+        //        {
+        //            var selectedUser = ((Users)DataGridUsers.SelectedItem).IDUsers;
+        //            idUser = selectedUser;
+        //            UsersVM usersVM = new UsersVM(); //подключение класса
+        //            bool checker = usersVM.CheckUsers(UsernameTextBox.Text, PasswordTextBox.Text, RoleComboBox.SelectedValue); // проверка заполнения полей
+        //            if (checker)
+        //            {
+        //                usersVM.EditUser(idUser, UsernameTextBox.Text, PasswordTextBox.Text, (int)RoleComboBox.SelectedValue);
+        //                MessageBox.Show("Данные о клиенте внесены");
+        //                DataGridUsers.ItemsSource = db.context.Users.ToList(); //Добавляет данные о клиентах и обновляет DataGrid
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show(ex.Message);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Данные для редактирования не выбраны");
+        //    }
+        //}
+
     }
 }

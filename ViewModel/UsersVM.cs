@@ -56,15 +56,15 @@ namespace RentacarApp.ViewModel
             db.context.SaveChanges();
         }
 
-        public void EditUser(int idUser, string username, string password, int idrole)
-        {
-            Users editUsers = db.context.Users.FirstOrDefault(x => x.IDUsers == idUser);
-            
-            editUsers.Username = username,
-            editUsers.Password = password,
-            editUsers.IDRole = idrole;
+        //public void EditUser(int idUser, string username, string password, int idrole)
+        //{
+        //    Users editUsers = db.context.Users.FirstOrDefault(x => x.IDUsers == idUser);
 
-            db.context.SaveChanges();
-        }
+        //    editUsers.Username = username;
+        //    editUsers.Password = password;
+        //    editUsers.IDRole = idrole;
+
+        //    db.context.SaveChanges();
+        //}
     }
 }
