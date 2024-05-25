@@ -61,17 +61,5 @@ namespace RentacarApp.ViewModel
             db.context.Clients.Remove(delClient);
             db.context.SaveChanges();
         }
-
-        //public void EditClient(int idClients, string address, string passportdata, string fullname, string dlicensenumber)
-        //{
-        //    Clients editClient = db.context.Clients.FirstOrDefault(x => x.IDClients == idClients);
-
-        //    editClient.Address = address;
-        //    editClient.PassportData = passportdata;
-        //    editClient.FullName = fullname;
-        //    editClient.DLicenseNumber = dlicensenumber;
-
-        //    db.context.SaveChanges();
-        //}
     }
 }

@@ -25,10 +25,10 @@ namespace RentacarApp
         {
             InitializeComponent();
             MainFrame.Navigate(new AuthPage());
-            ResizeMode = ResizeMode.CanMinimize; //отключает кнопку "во весь экран"
+            ResizeMode = ResizeMode.CanMinimize; 
             this.MinWidth = 750;
-            this.MinHeight = 550; //Устанавливает минимальные и максимальные размеры окна
-            this.MaxWidth = 750; // для отключения масштабирования
+            this.MinHeight = 550;
+            this.MaxWidth = 750;
             this.MaxHeight = 550;
         }
 

@@ -29,23 +29,23 @@ namespace RentacarApp.View
         {
             InitializeComponent();
 
-            DataGridUsers.ItemsSource = db.context.Users.ToList(); // Обновление DataGrid
+            DataGridUsers.ItemsSource = db.context.Users.ToList(); 
             RoleComboBox.ItemsSource = db.context.Roles.ToList();
             RoleComboBox.DisplayMemberPath = "RoleName";
-            RoleComboBox.SelectedValuePath = "IDRole"; // Подключение ComboBox'а к БД
+            RoleComboBox.SelectedValuePath = "IDRole"; 
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                UsersVM usersVM = new UsersVM(); //подключение класса
-                bool checker = usersVM.CheckUsers(UsernameTextBox.Text, PasswordTextBox.Text, RoleComboBox.SelectedValue); // проверка заполнения полей
+                UsersVM usersVM = new UsersVM(); 
+                bool checker = usersVM.CheckUsers(UsernameTextBox.Text, PasswordTextBox.Text, RoleComboBox.SelectedValue); 
                 if (checker)
                 {
                     usersVM.AddUsers(UsernameTextBox.Text, PasswordTextBox.Text, (int)RoleComboBox.SelectedValue);
                     MessageBox.Show("Данные о клиенте внесены");
-                    DataGridUsers.ItemsSource = db.context.Users.ToList(); //Добавляет данные о клиентах и обновляет DataGrid
+                    DataGridUsers.ItemsSource = db.context.Users.ToList(); 
                 }
             }
             catch (Exception ex)
@@ -63,17 +63,17 @@ namespace RentacarApp.View
                 {
                     try
                     {
-                        var selectedUsers = ((Users)DataGridUsers.SelectedItem).IDUsers; //Получение ID выбранного в DataGrid пользователя
+                        var selectedUsers = ((Users)DataGridUsers.SelectedItem).IDUsers; 
                         idUser = selectedUsers;
-                        UsersVM usersVM = new UsersVM(); //подключение класса
-                        usersVM.DeleteUser(idUser); // вызов метода в классе
+                        UsersVM usersVM = new UsersVM(); 
+                        usersVM.DeleteUser(idUser); 
                         MessageBox.Show("Данные о пользователе удалены");
                     }
                     catch
                     {
                         throw new Exception("Ошибка при удалении данных");
                     }
-                    DataGridUsers.ItemsSource = db.context.Users.ToList(); // Обновление DataGrid
+                    DataGridUsers.ItemsSource = db.context.Users.ToList(); 
                 }
             }
         }
@@ -82,7 +82,7 @@ namespace RentacarApp.View
         {
             if (this.NavigationService.CanGoBack)
             {
-                this.NavigationService.GoBack(); // Возврат на прошлую страницу
+                this.NavigationService.GoBack(); 
             }
             else
             {
@@ -99,34 +99,5 @@ namespace RentacarApp.View
                 db.context.SaveChanges();
             }
         }
-
-        //private void EditButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (DataGridUsers.SelectedItem != null)
-        //    {
-        //        try
-        //        {
-        //            var selectedUser = ((Users)DataGridUsers.SelectedItem).IDUsers;
-        //            idUser = selectedUser;
-        //            UsersVM usersVM = new UsersVM(); //подключение класса
-        //            bool checker = usersVM.CheckUsers(UsernameTextBox.Text, PasswordTextBox.Text, RoleComboBox.SelectedValue); // проверка заполнения полей
-        //            if (checker)
-        //            {
-        //                usersVM.EditUser(idUser, UsernameTextBox.Text, PasswordTextBox.Text, (int)RoleComboBox.SelectedValue);
-        //                MessageBox.Show("Данные о клиенте внесены");
-        //                DataGridUsers.ItemsSource = db.context.Users.ToList(); //Добавляет данные о клиентах и обновляет DataGrid
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show(ex.Message);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Данные для редактирования не выбраны");
-        //    }
-        //}
-
     }
 }

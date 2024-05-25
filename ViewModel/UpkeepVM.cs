@@ -40,7 +40,7 @@ namespace RentacarApp.ViewModel
             {
                 throw new Exception("Цена не указана");
             }            
-            if (!cost.All(char.IsDigit)) // проверяет состоит ли string из чисел
+            if (!cost.All(char.IsDigit)) 
             {
                 throw new Exception("Цена введена некорректно");
             }
@@ -56,17 +56,5 @@ namespace RentacarApp.ViewModel
             db.context.Upkeep.Remove(delUpkeep);
             db.context.SaveChanges();
         }
-
-        //public void EditUpkeep(int idUpkeep, int idcars, DateTime beginupkeepdate, DateTime endupkeepdate, string price)
-        //{
-        //    Upkeep editUpkeep = db.context.Upkeep.FirstOrDefault(x => x.IDUpkeep == idUpkeep);
-
-        //    editUpkeep.IDCars = idcars;
-        //    editUpkeep.BeginUpkeepDate = beginupkeepdate;
-        //    editUpkeep.EndUpkeepDate = endupkeepdate;
-        //    editUpkeep.Price = Convert.ToDecimal(price);
-
-        //    db.context.SaveChanges();
-        //}
     }
 }

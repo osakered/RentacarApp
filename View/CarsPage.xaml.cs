@@ -30,17 +30,17 @@ namespace RentacarApp.View
             InitializeComponent();
             
             AvailabilityComboBox.ItemsSource = db.context.Availability.ToList();
-            AvailabilityComboBox.DisplayMemberPath = "AvailabilityState";
-            AvailabilityComboBox.SelectedValuePath = "IDAvailability"; // Подключение ComboBox'а к БД
-            CarProdYearDatePicker.Text = DateTime.Now.Date.ToString(); // Выставляет сегодняшнюю дату в DatePicker'е
-            DataGridCars.ItemsSource = db.context.Cars.ToList(); //Обновление DataGrid
+            AvailabilityComboBox.DisplayMemberPath = "AvailabilityState"; 
+            AvailabilityComboBox.SelectedValuePath = "IDAvailability"; 
+            CarProdYearDatePicker.Text = DateTime.Now.Date.ToString(); 
+            DataGridCars.ItemsSource = db.context.Cars.ToList(); 
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             if (this.NavigationService.CanGoBack)
             {
-                this.NavigationService.GoBack(); // Возврат на прошлую страницу
+                this.NavigationService.GoBack();
             }
             else
             {
@@ -57,12 +57,12 @@ namespace RentacarApp.View
                 {
                     try
                     {
-                        var selectedCars = ((Cars)DataGridCars.SelectedItem).IDCars; //Получение ID выбранного в DataGrid авто
+                        var selectedCars = ((Cars)DataGridCars.SelectedItem).IDCars;
                         idCar = selectedCars;
-                        CarsVM carsVM = new CarsVM(); //подключение класса
-                        carsVM.DeleteCar(idCar); // вызов метода в классе
+                        CarsVM carsVM = new CarsVM(); 
+                        carsVM.DeleteCar(idCar); 
                         MessageBox.Show("Автомобиль удален");
-                        DataGridCars.ItemsSource = db.context.Cars.ToList(); // Обновление DataGrid
+                        DataGridCars.ItemsSource = db.context.Cars.ToList(); 
                     }
                     catch 
                     {
@@ -79,13 +79,13 @@ namespace RentacarApp.View
         {
             try
             {
-                CarsVM CarVM = new CarsVM(); //подключение класса
-                bool checker = CarVM.CheckCar(ModelTextBox.Text, ColorTextBox.Text, RegNumberTextBox.Text, AvailabilityComboBox.SelectedValue); // проверка заполнения полей
+                CarsVM CarVM = new CarsVM();
+                bool checker = CarVM.CheckCar(ModelTextBox.Text, ColorTextBox.Text, RegNumberTextBox.Text, AvailabilityComboBox.SelectedValue);
                 if (checker)
                 {
                     CarVM.AddCar(ModelTextBox.Text, Convert.ToDateTime(CarProdYearDatePicker.SelectedDate), ColorTextBox.Text, RegNumberTextBox.Text, (int)AvailabilityComboBox.SelectedValue);
                     MessageBox.Show("Автомобиль добавлен");
-                    DataGridCars.ItemsSource = db.context.Cars.ToList(); //Добавляет авто и обновляет DataGrid
+                    DataGridCars.ItemsSource = db.context.Cars.ToList();
                 }
             }
             catch (Exception ex)
@@ -99,35 +99,8 @@ namespace RentacarApp.View
             {
                 var EditRow = e.Row.Item as Cars;
                 db.context.Entry(EditRow).State = EntityState.Modified;
-                db.context.SaveChanges(); 
+                db.context.SaveChanges();
             }
         }
-        //private void EditButton_Click(object sender, RoutedEventArgs e) //Старое редактирование, у которого не обновляется DataGrid 
-        //{
-        //    if (DataGridCars.SelectedItem != null)
-        //    {
-        //        try
-        //        {
-        //            var selectedCars = ((Cars)DataGridCars.SelectedItem).IDCars; //Получение ID выбранного в DataGrid авто
-        //            idCar = selectedCars;
-        //            CarsVM CarVM = new CarsVM(); //подключение класса
-        //            bool checker = CarVM.CheckCar(ModelTextBox.Text, ColorTextBox.Text, RegNumberTextBox.Text, AvailabilityComboBox.SelectedValue); // проверка заполнения полей
-        //            if (checker)
-        //            {
-        //                CarVM.EditCar(idCar, ModelTextBox.Text, Convert.ToDateTime(CarProdYearDatePicker.SelectedDate), ColorTextBox.Text, RegNumberTextBox.Text, (int)AvailabilityComboBox.SelectedValue);
-        //                MessageBox.Show("Данные об авто отредактированы");
-        //                DataGridCars.ItemsSource = db.context.Cars.ToList(); // Обновление DataGrid
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show(ex.Message);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Автомобиль для редактирования не выбран");
-        //    }
-        //}
     }
 }

@@ -29,10 +29,10 @@ namespace RentacarApp.View
         {
             InitializeComponent();
 
-            DataGridUpkeep.ItemsSource = db.context.Upkeep.ToList(); // Обновление DataGrid
-            CarsComboBox.ItemsSource = db.context.Cars.ToList(); // Подключение ComboBox'ов к БД 
-            BeginUpkeepDatePicker.Text = DateTime.Now.Date.ToString(); // Выставляет сегодняшнюю дату в DatePicker
-            EndUpkeepDatePicker.Text = DateTime.Now.Date.AddDays(+1).ToString(); // Выставляет завтрашнюю дату в DatePicker
+            DataGridUpkeep.ItemsSource = db.context.Upkeep.ToList(); 
+            CarsComboBox.ItemsSource = db.context.Cars.ToList(); 
+            BeginUpkeepDatePicker.Text = DateTime.Now.Date.ToString(); 
+            EndUpkeepDatePicker.Text = DateTime.Now.Date.AddDays(+1).ToString(); 
         }
 
 
@@ -40,13 +40,13 @@ namespace RentacarApp.View
         {
             try
             {
-                UpkeepVM upkeepVM = new UpkeepVM(); //подключение класса
-                bool checker = upkeepVM.CheckUpkeep(CarsComboBox.SelectedValue, PriceTextBox.Text); // проверка заполнения полей
+                UpkeepVM upkeepVM = new UpkeepVM();
+                bool checker = upkeepVM.CheckUpkeep(CarsComboBox.SelectedValue, PriceTextBox.Text); 
                 if (checker)
                 {
                     upkeepVM.AddUpkeep((int)CarsComboBox.SelectedValue, Convert.ToDateTime(BeginUpkeepDatePicker.SelectedDate), Convert.ToDateTime(EndUpkeepDatePicker.SelectedDate), PriceTextBox.Text);
                     MessageBox.Show("Данные об обслуживании внесены");
-                    DataGridUpkeep.ItemsSource = db.context.Upkeep.ToList(); //Добавляет данные об обслуживании и обновляет DataGrid
+                    DataGridUpkeep.ItemsSource = db.context.Upkeep.ToList(); 
                 }
             }
             catch (Exception ex)
@@ -63,17 +63,17 @@ namespace RentacarApp.View
                 {
                     try
                     {
-                        var selectedUpkeep = ((Upkeep)DataGridUpkeep.SelectedItem).IDUpkeep; //Получение ID выбранного в DataGrid обслуживания
+                        var selectedUpkeep = ((Upkeep)DataGridUpkeep.SelectedItem).IDUpkeep; 
                         idUpkeep = selectedUpkeep;
-                        UpkeepVM upkeepVM = new UpkeepVM(); //подключение класса
-                        upkeepVM.DeleteUpkeep(idUpkeep); // вызов метода в классе
+                        UpkeepVM upkeepVM = new UpkeepVM(); 
+                        upkeepVM.DeleteUpkeep(idUpkeep); 
                         MessageBox.Show("Данные об обслуживании удалены");
                     }
                     catch
                     {
                         throw new Exception("Ошибка при удалении данных");
                     }
-                    DataGridUpkeep.ItemsSource = db.context.Upkeep.ToList(); // Обновление DataGrid
+                    DataGridUpkeep.ItemsSource = db.context.Upkeep.ToList();
                 }
             }
         }
@@ -82,7 +82,7 @@ namespace RentacarApp.View
         {
             if (this.NavigationService.CanGoBack)
             {
-                this.NavigationService.GoBack(); // Возврат на прошлую страницу
+                this.NavigationService.GoBack(); 
             }
             else
             {
@@ -99,33 +99,5 @@ namespace RentacarApp.View
                 db.context.SaveChanges();
             }
         }
-
-        //private void EditButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (DataGridUpkeep.SelectedItem != null)
-        //    {
-        //        try
-        //        {
-        //            var selectedUpkeep = ((Upkeep)DataGridUpkeep.SelectedItem).IDUpkeep;
-        //            idUpkeep = selectedUpkeep;
-        //            UpkeepVM upkeepVM = new UpkeepVM(); //подключение класса
-        //            bool checker = upkeepVM.CheckUpkeep(CarsComboBox.SelectedValue, PriceTextBox.Text); // проверка заполнения полей
-        //            if (checker)
-        //            {
-        //                upkeepVM.EditUpkeep(idUpkeep, (int)CarsComboBox.SelectedValue, Convert.ToDateTime(BeginUpkeepDatePicker.SelectedDate), Convert.ToDateTime(EndUpkeepDatePicker.SelectedDate), PriceTextBox.Text);
-        //                MessageBox.Show("Данные об обслуживании отредактированы");
-        //                DataGridUpkeep.ItemsSource = db.context.Upkeep.ToList(); //Добавляет данные об обслуживании и обновляет DataGrid
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show(ex.Message);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Данные для редактирования не выбраны");
-        //    }
-        //}
     }
 }

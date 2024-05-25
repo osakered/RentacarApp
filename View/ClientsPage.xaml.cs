@@ -29,14 +29,14 @@ namespace RentacarApp.View
         {
             InitializeComponent();
 
-            DataGridClients.ItemsSource = db.context.Clients.ToList(); // Обновление DataGrid
+            DataGridClients.ItemsSource = db.context.Clients.ToList(); 
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             if (this.NavigationService.CanGoBack)
             {
-                this.NavigationService.GoBack(); // Возврат на прошлую страницу
+                this.NavigationService.GoBack(); 
             }
             else
             {
@@ -53,17 +53,17 @@ namespace RentacarApp.View
                 {
                     try
                     {
-                        var selectedClients = ((Clients)DataGridClients.SelectedItem).IDClients; //Получение ID выбранного в DataGrid клиента
+                        var selectedClients = ((Clients)DataGridClients.SelectedItem).IDClients;
                         idClients = selectedClients;
-                        ClientsVM clientsVM = new ClientsVM(); //подключение класса
-                        clientsVM.DeleteClient(idClients); // вызов метода в классе
+                        ClientsVM clientsVM = new ClientsVM();
+                        clientsVM.DeleteClient(idClients);
                         MessageBox.Show("Данные о клиенте удалены");
                     }
                     catch
                     {
                         throw new Exception("Ошибка при удалении данных");
                     }
-                    DataGridClients.ItemsSource = db.context.Clients.ToList(); // Обновление DataGrid
+                    DataGridClients.ItemsSource = db.context.Clients.ToList(); 
                 }
             }
         }
@@ -72,13 +72,13 @@ namespace RentacarApp.View
         {
             try
             {
-                ClientsVM clientsVM = new ClientsVM(); //подключение класса
-                bool checker = clientsVM.CheckClients(AddressTextBox.Text, PassportDataTextBox.Text, FullNameTextBox.Text, DLicenseNumberTextBox.Text); // проверка заполнения полей
+                ClientsVM clientsVM = new ClientsVM(); 
+                bool checker = clientsVM.CheckClients(AddressTextBox.Text, PassportDataTextBox.Text, FullNameTextBox.Text, DLicenseNumberTextBox.Text);
                 if (checker)
                 {
                     clientsVM.AddClients(AddressTextBox.Text, PassportDataTextBox.Text, FullNameTextBox.Text, DLicenseNumberTextBox.Text);
                     MessageBox.Show("Данные о клиенте внесены");
-                    DataGridClients.ItemsSource = db.context.Clients.ToList(); //Добавляет данные о клиентах и обновляет DataGrid
+                    DataGridClients.ItemsSource = db.context.Clients.ToList();
                 }
             }
             catch (Exception ex)
@@ -96,34 +96,5 @@ namespace RentacarApp.View
                 db.context.SaveChanges();
             }
         }
-
-        //private void EditButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (DataGridClients.SelectedItem != null)
-        //    {
-        //        try
-        //        {
-        //            var selectedClients = ((Clients)DataGridClients.SelectedItem).IDClients;
-        //            idClients = selectedClients;
-        //            ClientsVM clientsVM = new ClientsVM(); //подключение класса
-        //            bool checker = clientsVM.CheckClients(AddressTextBox.Text, PassportDataTextBox.Text, FullNameTextBox.Text, DLicenseNumberTextBox.Text); // проверка заполнения полей
-        //            if (checker)
-        //            {
-        //                clientsVM.EditClient(idClients, AddressTextBox.Text, PassportDataTextBox.Text, FullNameTextBox.Text, DLicenseNumberTextBox.Text);
-        //                MessageBox.Show("Данные о клиенте отредактированы");
-        //                DataGridClients.ItemsSource = db.context.Clients.ToList(); //Добавляет данные о клиентах и обновляет DataGrid
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show(ex.Message);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Данные для редактирования не выбраны");
-        //    }
-        //}
-
     }
 }

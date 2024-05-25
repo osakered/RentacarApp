@@ -32,25 +32,25 @@ namespace RentacarApp.Pages
             string username = TextBoxUsername.Text;
             string password = TextBoxPassword.Password;
 
-            if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password)) //Проверка заполнения полей
+            if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password)) 
             {
-                Users user = db.context.Users.FirstOrDefault(u => u.Username == username);  // Поиск пользователя в БД
+                Users user = db.context.Users.FirstOrDefault(u => u.Username == username); 
 
                 if (user != null)
                 {
-                    if (password.Equals(user.Password)) // Сравнение введенного пароля с паролем в БД
+                    if (password.Equals(user.Password)) 
                     {
                         int idRole = user.IDRole;
-                        switch (idRole) //Открытие страницы в зависимости от роли
+                        switch (idRole)
                         {
                             case 1:
-                                this.NavigationService.Navigate(new MainPageManager()); //Страница Менеджера
+                                this.NavigationService.Navigate(new MainPageManager());
                                 break;
                             case 2:
-                                this.NavigationService.Navigate(new MainPageSysAdmin()); //Страница Системного Администратора
+                                this.NavigationService.Navigate(new MainPageSysAdmin());
                                 break;
                             case 3:
-                                this.NavigationService.Navigate(new MainPageDirector()); //Страница Директора
+                                this.NavigationService.Navigate(new MainPageDirector());
                                 break;
                             default:
                                 MessageBox.Show("Некорректное значение роли пользователя.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);

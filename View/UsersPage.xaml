@@ -59,7 +59,6 @@
                     <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
                         <UniformGrid Columns="3">
                             <Button x:Name="AddButton" Click="AddButton_Click" Background="#cacaca" FontSize="10" Content="Добавить"/>
-                            <!--<Button x:Name="EditButton" Click="EditButton_Click" Background="#cacaca" FontSize="10" Content="Редактировать"/>-->
                             <Button x:Name="DeleteButton" Click="DeleteButton_Click" Background="#d6a7a7" FontSize="10" Content="Удалить"/>
                             <Button x:Name="BackButton" Click="BackButton_Click" Background="#cacaca" FontSize="10" Content="Назад"/>
                         </UniformGrid>

@@ -10,10 +10,8 @@
 
     <Grid Background="#f5f5f5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="20"></RowDefinition>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Grid.Column="0" Background="#ebebeb">
@@ -22,12 +20,16 @@
                 <TextBlock Text="Формирование отчетов" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center" VerticalAlignment="Center" />
             </StackPanel>
         </Border>
-        <DataGrid Grid.Row="1"></DataGrid>
-        <StackPanel Grid.Row="3"  VerticalAlignment="Center" HorizontalAlignment="Right">
+        <DataGrid x:Name="DataGridReports" Grid.Row="1" AutoGenerateColumns="False" IsEnabled="True" FontFamily="Bahnschrift Light">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="" Width="*"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="1"  VerticalAlignment="Bottom" HorizontalAlignment="Right">
             <Button x:Name="BackButton" Click="BackButton_Click" 
                     Content="Назад"  Width="70px"  Background="#cacaca"  FontFamily="Bahnschrift" Height="auto"/>
         </StackPanel>
-        <StackPanel Grid.Row="4" Background="#ebebeb">
+        <StackPanel Grid.Row="2" Background="#ebebeb">
         </StackPanel>
     </Grid>
 </Page>

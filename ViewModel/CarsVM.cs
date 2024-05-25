@@ -14,7 +14,7 @@ namespace RentacarApp.ViewModel
     {
         Core db = new Core();
 
-        public void AddCar(string carmodel, DateTime carprodyear, string carcolor, string regnumber, int idavailability) // Добавление авто
+        public void AddCar(string carmodel, DateTime carprodyear, string carcolor, string regnumber, int idavailability)
         {
             Cars addCars = new Cars()
             {
@@ -28,7 +28,7 @@ namespace RentacarApp.ViewModel
             db.context.SaveChanges();
         }
 
-        public bool CheckCar(string model, string color, string regnumber, object availability) //Проверка заполнения полей
+        public bool CheckCar(string model, string color, string regnumber, object availability) 
         {
             if (String.IsNullOrEmpty(model) && String.IsNullOrEmpty(color) && String.IsNullOrEmpty(regnumber) && availability == null)
             {
@@ -56,25 +56,12 @@ namespace RentacarApp.ViewModel
             }
         }
 
-        public void DeleteCar(int idCar) // Удаление авто
+        public void DeleteCar(int idCar) 
         {
             Cars delCar = db.context.Cars.FirstOrDefault(x=>x.IDCars == idCar);
 
             db.context.Cars.Remove(delCar);
             db.context.SaveChanges();
         }
-
-        //public void EditCar(int idCar, string carmodel, DateTime carprodyear, string carcolor, string regnumber, int idavailability) // Старое редактирование
-        //{
-        //    Cars editCar = db.context.Cars.FirstOrDefault(x => x.IDCars == idCar);
-
-        //    editCar.CarModel = carmodel;
-        //    editCar.CarProdYear = carprodyear;
-        //    editCar.CarColor = carcolor;
-        //    editCar.RegNumber = regnumber;
-        //    editCar.IDAvailability = idavailability;
-            
-        //    db.context.SaveChanges();
-        //}
     }
 }

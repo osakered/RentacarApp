@@ -45,7 +45,7 @@ namespace RentacarApp.ViewModel
             {
                 throw new Exception("Стоимость не указана");
             }            
-            if (!cost.All(char.IsDigit)) // проверяет состоит ли string из чисел
+            if (!cost.All(char.IsDigit)) 
             {
                 throw new Exception("Стоимость указана некорректно");
             }
@@ -61,18 +61,5 @@ namespace RentacarApp.ViewModel
             db.context.Rental.Remove(delRent);
             db.context.SaveChanges();
         }
-
-        //public void EditRent(int idRent, int idclient, int idcar, string cost, DateTime datestart, DateTime dateend)
-        //{
-        //    Rental editRent = db.context.Rental.FirstOrDefault(x => x.IDRent == idRent);
-
-        //    editRent.IDClients = idclient;
-        //    editRent.IDCars = idcar;
-        //    editRent.Cost = Convert.ToDecimal(cost);
-        //    editRent.DateStart = datestart;
-        //    editRent.DateEnd = dateend;
-
-        //    db.context.SaveChanges();
-        //}
     }
 }

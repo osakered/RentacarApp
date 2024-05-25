@@ -29,24 +29,24 @@ namespace RentacarApp.View
         {
             InitializeComponent();
 
-            DataGridRent.ItemsSource = db.context.Rental.ToList(); //Обновление DataGrid
+            DataGridRent.ItemsSource = db.context.Rental.ToList(); 
             ClientsComboBox.ItemsSource = db.context.Clients.ToList();
-            CarsComboBox.ItemsSource = db.context.Cars.ToList(); // Подключение ComboBox'ов к БД
-            DateStartPicker.Text = DateTime.Now.Date.ToString(); // Выставляет сегодняшнюю дату в DatePicker
-            DateEndPicker.Text = DateTime.Now.Date.AddDays(+1).ToString(); // Выставляет завтрашнюю дату в DatePicker
+            CarsComboBox.ItemsSource = db.context.Cars.ToList(); 
+            DateStartPicker.Text = DateTime.Now.Date.ToString(); 
+            DateEndPicker.Text = DateTime.Now.Date.AddDays(+1).ToString(); 
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                RentalVM RentVM = new RentalVM(); //подключение класса
-                bool checker = RentVM.CheckRental(ClientsComboBox.SelectedValue, CarsComboBox.SelectedValue, CostTextBox.Text); // проверка заполнения полей
+                RentalVM RentVM = new RentalVM();
+                bool checker = RentVM.CheckRental(ClientsComboBox.SelectedValue, CarsComboBox.SelectedValue, CostTextBox.Text); 
                 if (checker)
                 {
                     RentVM.AddRental((int)ClientsComboBox.SelectedValue, (int)CarsComboBox.SelectedValue, CostTextBox.Text, Convert.ToDateTime(DateStartPicker.SelectedDate), Convert.ToDateTime(DateEndPicker.SelectedDate));
                     MessageBox.Show("Данные об аренде внесены");
-                    DataGridRent.ItemsSource = db.context.Rental.ToList(); //Добавляет данные об аренде и обновляет DataGrid
+                    DataGridRent.ItemsSource = db.context.Rental.ToList(); 
                 }
             }
             catch (Exception ex)
@@ -63,17 +63,17 @@ namespace RentacarApp.View
                 {
                     try
                     {
-                        var selectedRents = ((Rental)DataGridRent.SelectedItem).IDRent; //Получение ID выбранной в DataGrid аренды
+                        var selectedRents = ((Rental)DataGridRent.SelectedItem).IDRent; 
                         idRent = selectedRents;
-                        RentalVM rentVM = new RentalVM(); //подключение класса
-                        rentVM.DeleteRent(idRent); // вызов метода в классе
+                        RentalVM rentVM = new RentalVM(); 
+                        rentVM.DeleteRent(idRent);
                         MessageBox.Show("Данные об аренде удалены");
                     }
                     catch
                     {
                         throw new Exception("Ошибка при удалении данных аренды");
                     }
-                    DataGridRent.ItemsSource = db.context.Rental.ToList(); // Обновление DataGrid
+                    DataGridRent.ItemsSource = db.context.Rental.ToList(); 
                 }
             }
         }
@@ -82,7 +82,7 @@ namespace RentacarApp.View
         {
             if (this.NavigationService.CanGoBack)
             {
-                this.NavigationService.GoBack(); // Возврат на прошлую страницу
+                this.NavigationService.GoBack(); 
             }
             else
             {
@@ -99,33 +99,5 @@ namespace RentacarApp.View
                 db.context.SaveChanges();
             }
         }
-
-        //private void EditButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (DataGridRent.SelectedItem != null)
-        //    {
-        //        try
-        //        {
-        //            var selectedRents = ((Rental)DataGridRent.SelectedItem).IDRent;
-        //            idRent = selectedRents;
-        //            RentalVM RentVM = new RentalVM(); //подключение класса
-        //            bool checker = RentVM.CheckRental(ClientsComboBox.SelectedValue, CarsComboBox.SelectedValue, CostTextBox.Text); // проверка заполнения полей
-        //            if (checker)
-        //            {
-        //                RentVM.EditRent(idRent, (int)ClientsComboBox.SelectedValue, (int)CarsComboBox.SelectedValue, CostTextBox.Text, Convert.ToDateTime(DateStartPicker.SelectedDate), Convert.ToDateTime(DateEndPicker.SelectedDate));
-        //                MessageBox.Show("Данные об аренде отредактированы");
-        //                DataGridRent.ItemsSource = db.context.Rental.ToList(); //Обновление DataGrid
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show(ex.Message);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Аренда для редактирования не выбран");
-        //    }
-        //}
     }
 }
