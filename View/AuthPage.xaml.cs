@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RentacarApp.ViewModel;
 
 namespace RentacarApp.Pages
 {
@@ -31,14 +32,13 @@ namespace RentacarApp.Pages
         {
             string username = TextBoxUsername.Text;
             string password = TextBoxPassword.Password;
-
-            if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password)) 
+            Users user = db.context.Users.FirstOrDefault(u => u.Username == username);
+            try
             {
-                Users user = db.context.Users.FirstOrDefault(u => u.Username == username); 
-
-                if (user != null)
+                bool checker = AuthVM.CheckAuth(username, password);
+                if (checker)
                 {
-                    if (password.Equals(user.Password)) 
+                    if (password.Equals(user.Password))
                     {
                         int idRole = user.IDRole;
                         switch (idRole)
@@ -57,19 +57,11 @@ namespace RentacarApp.Pages
                                 break;
                         }
                     }
-                    else
-                    {
-                        MessageBox.Show("Неверное имя пользователя или пароль.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Пользователь не найден.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Заполните поля.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(ex.Message);
             }
         }
     }

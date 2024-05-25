@@ -57,12 +57,22 @@ namespace RentacarApp.View
         {
             if (this.NavigationService.CanGoBack)
             {
-                this.NavigationService.GoBack(); // Возврат на прошлую страницу
+                this.NavigationService.GoBack();
             }
             else
             {
                 MessageBox.Show("До этого не было открыто ни одной страницы");
             }
+        }
+
+        private void FilterComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         //public void CurrentGroups()

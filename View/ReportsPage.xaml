@@ -25,7 +25,10 @@
                 <DataGridTextColumn Header="" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Row="1"  VerticalAlignment="Bottom" HorizontalAlignment="Right">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+            <ComboBox Name="FilterComboBox" SelectionChanged="FilterComboBoxSelectionChanged" Width="150px" Height="20px"></ComboBox>
+            <Button x:Name="SaveButton" Click="SaveButton_Click" 
+                    Content="Сохранить"  Width="100px"  Background="#cacaca"  FontFamily="Bahnschrift" Height="auto"/>
             <Button x:Name="BackButton" Click="BackButton_Click" 
                     Content="Назад"  Width="70px"  Background="#cacaca"  FontFamily="Bahnschrift" Height="auto"/>
         </StackPanel>
