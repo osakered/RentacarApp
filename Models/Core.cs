@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace RentacarApp.Models
 {
-    class Core
+    public class Core
     {
         public RentacarDBEntities context = new RentacarDBEntities(); 
     }
 }
-
-// используется для подключения к БД
-// спасибо кэп
