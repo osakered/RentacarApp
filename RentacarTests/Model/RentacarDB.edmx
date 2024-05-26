@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище RentacarDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище RentacarDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Actions">
           <Key>
             <PropertyRef Name="ActionID" />
@@ -39,6 +39,7 @@
           <Property Name="PassportData" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="DLicenseNumber" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="PhoneNumber" Type="text" />
         </EntityType>
         <EntityType Name="Logs">
           <Key>
@@ -216,51 +217,87 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RentacarDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="RentacarDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Actions" EntityType="RentacarDBModel.Actions" />
+          <EntitySet Name="Availability" EntityType="RentacarDBModel.Availability" />
+          <EntitySet Name="Cars" EntityType="RentacarDBModel.Cars" />
+          <EntitySet Name="Clients" EntityType="RentacarDBModel.Clients" />
+          <EntitySet Name="Logs" EntityType="RentacarDBModel.Logs" />
+          <EntitySet Name="Rental" EntityType="RentacarDBModel.Rental" />
+          <EntitySet Name="Roles" EntityType="RentacarDBModel.Roles" />
+          <EntitySet Name="sysdiagrams" EntityType="RentacarDBModel.sysdiagrams" />
+          <EntitySet Name="Upkeep" EntityType="RentacarDBModel.Upkeep" />
+          <EntitySet Name="Users" EntityType="RentacarDBModel.Users" />
+          <AssociationSet Name="FK_Logs_Actions" Association="RentacarDBModel.FK_Logs_Actions">
+            <End Role="Actions" EntitySet="Actions" />
+            <End Role="Logs" EntitySet="Logs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cars_Availability" Association="RentacarDBModel.FK_Cars_Availability">
+            <End Role="Availability" EntitySet="Availability" />
+            <End Role="Cars" EntitySet="Cars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rental_Cars" Association="RentacarDBModel.FK_Rental_Cars">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="Rental" EntitySet="Rental" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Upkeep_Cars" Association="RentacarDBModel.FK_Upkeep_Cars">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="Upkeep" EntitySet="Upkeep" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rental_Clients" Association="RentacarDBModel.FK_Rental_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Rental" EntitySet="Rental" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="RentacarDBModel.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Actions">
           <Key>
             <PropertyRef Name="ActionID" />
           </Key>
           <Property Name="ActionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ActionType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Logs" Relationship="Self.FK_Logs_Actions" FromRole="Actions" ToRole="Logs" />
+          <Property Name="ActionType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Logs" Relationship="RentacarDBModel.FK_Logs_Actions" FromRole="Actions" ToRole="Logs" />
         </EntityType>
         <EntityType Name="Availability">
           <Key>
             <PropertyRef Name="IDAvailability" />
           </Key>
           <Property Name="IDAvailability" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AvailabilityState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Cars" Relationship="Self.FK_Cars_Availability" FromRole="Availability" ToRole="Cars" />
+          <Property Name="AvailabilityState" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cars" Relationship="RentacarDBModel.FK_Cars_Availability" FromRole="Availability" ToRole="Cars" />
         </EntityType>
         <EntityType Name="Cars">
           <Key>
             <PropertyRef Name="IDCars" />
           </Key>
           <Property Name="IDCars" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CarModel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CarModel" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CarProdYear" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CarColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="RegNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="CarColor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RegNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="IDAvailability" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Availability" Relationship="Self.FK_Cars_Availability" FromRole="Cars" ToRole="Availability" />
-          <NavigationProperty Name="Rental" Relationship="Self.FK_Rental_Cars" FromRole="Cars" ToRole="Rental" />
-          <NavigationProperty Name="Upkeep" Relationship="Self.FK_Upkeep_Cars" FromRole="Cars" ToRole="Upkeep" />
+          <NavigationProperty Name="Availability" Relationship="RentacarDBModel.FK_Cars_Availability" FromRole="Cars" ToRole="Availability" />
+          <NavigationProperty Name="Rental" Relationship="RentacarDBModel.FK_Rental_Cars" FromRole="Cars" ToRole="Rental" />
+          <NavigationProperty Name="Upkeep" Relationship="RentacarDBModel.FK_Upkeep_Cars" FromRole="Cars" ToRole="Upkeep" />
         </EntityType>
         <EntityType Name="Clients">
           <Key>
             <PropertyRef Name="IDClients" />
           </Key>
           <Property Name="IDClients" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PassportData" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DLicenseNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Rental" Relationship="Self.FK_Rental_Clients" FromRole="Clients" ToRole="Rental" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PassportData" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DLicenseNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Rental" Relationship="RentacarDBModel.FK_Rental_Clients" FromRole="Clients" ToRole="Rental" />
         </EntityType>
         <EntityType Name="Logs">
           <Key>
@@ -270,7 +307,7 @@
           <Property Name="IDUsers" Type="Int32" Nullable="false" />
           <Property Name="LogTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ActionID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Actions" Relationship="Self.FK_Logs_Actions" FromRole="Logs" ToRole="Actions" />
+          <NavigationProperty Name="Actions" Relationship="RentacarDBModel.FK_Logs_Actions" FromRole="Logs" ToRole="Actions" />
         </EntityType>
         <EntityType Name="Rental">
           <Key>
@@ -279,25 +316,25 @@
           <Property Name="IDRent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IDClients" Type="Int32" Nullable="false" />
           <Property Name="IDCars" Type="Int32" Nullable="false" />
-          <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="DateEnd" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Cars" Relationship="Self.FK_Rental_Cars" FromRole="Rental" ToRole="Cars" />
-          <NavigationProperty Name="Clients" Relationship="Self.FK_Rental_Clients" FromRole="Rental" ToRole="Clients" />
+          <NavigationProperty Name="Cars" Relationship="RentacarDBModel.FK_Rental_Cars" FromRole="Rental" ToRole="Cars" />
+          <NavigationProperty Name="Clients" Relationship="RentacarDBModel.FK_Rental_Clients" FromRole="Rental" ToRole="Clients" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
             <PropertyRef Name="IDRole" />
           </Key>
           <Property Name="IDRole" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Roles" FromRole="Roles" ToRole="Users" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="RentacarDBModel.FK_Users_Roles" FromRole="Roles" ToRole="Users" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
@@ -311,24 +348,24 @@
           <Property Name="IDCars" Type="Int32" Nullable="false" />
           <Property Name="BeginUpkeepDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="EndUpkeepDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <NavigationProperty Name="Cars" Relationship="Self.FK_Upkeep_Cars" FromRole="Upkeep" ToRole="Cars" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Cars" Relationship="RentacarDBModel.FK_Upkeep_Cars" FromRole="Upkeep" ToRole="Cars" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="IDUsers" />
           </Key>
           <Property Name="IDUsers" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IDRole" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Roles" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="Roles" Relationship="RentacarDBModel.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
         </EntityType>
         <Association Name="FK_Logs_Actions">
-          <End Role="Actions" Type="Self.Actions" Multiplicity="1">
+          <End Type="RentacarDBModel.Actions" Role="Actions" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Logs" Type="Self.Logs" Multiplicity="*" />
+          <End Type="RentacarDBModel.Logs" Role="Logs" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Actions">
               <PropertyRef Name="ActionID" />
@@ -339,10 +376,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Cars_Availability">
-          <End Role="Availability" Type="Self.Availability" Multiplicity="1">
+          <End Type="RentacarDBModel.Availability" Role="Availability" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
+          <End Type="RentacarDBModel.Cars" Role="Cars" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Availability">
               <PropertyRef Name="IDAvailability" />
@@ -353,10 +390,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Rental_Cars">
-          <End Role="Cars" Type="Self.Cars" Multiplicity="1">
+          <End Type="RentacarDBModel.Cars" Role="Cars" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Rental" Type="Self.Rental" Multiplicity="*" />
+          <End Type="RentacarDBModel.Rental" Role="Rental" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cars">
               <PropertyRef Name="IDCars" />
@@ -367,10 +404,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Upkeep_Cars">
-          <End Role="Cars" Type="Self.Cars" Multiplicity="1">
+          <End Type="RentacarDBModel.Cars" Role="Cars" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Upkeep" Type="Self.Upkeep" Multiplicity="*" />
+          <End Type="RentacarDBModel.Upkeep" Role="Upkeep" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cars">
               <PropertyRef Name="IDCars" />
@@ -381,10 +418,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Rental_Clients">
-          <End Role="Clients" Type="Self.Clients" Multiplicity="1">
+          <End Type="RentacarDBModel.Clients" Role="Clients" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Rental" Type="Self.Rental" Multiplicity="*" />
+          <End Type="RentacarDBModel.Rental" Role="Rental" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Clients">
               <PropertyRef Name="IDClients" />
@@ -395,10 +432,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Users_Roles">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+          <End Type="RentacarDBModel.Roles" Role="Roles" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <End Type="RentacarDBModel.Users" Role="Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
               <PropertyRef Name="IDRole" />
@@ -408,42 +445,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="RentacarDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Actions" EntityType="Self.Actions" />
-          <EntitySet Name="Availability" EntityType="Self.Availability" />
-          <EntitySet Name="Cars" EntityType="Self.Cars" />
-          <EntitySet Name="Clients" EntityType="Self.Clients" />
-          <EntitySet Name="Logs" EntityType="Self.Logs" />
-          <EntitySet Name="Rental" EntityType="Self.Rental" />
-          <EntitySet Name="Roles" EntityType="Self.Roles" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="Upkeep" EntityType="Self.Upkeep" />
-          <EntitySet Name="Users" EntityType="Self.Users" />
-          <AssociationSet Name="FK_Logs_Actions" Association="Self.FK_Logs_Actions">
-            <End Role="Actions" EntitySet="Actions" />
-            <End Role="Logs" EntitySet="Logs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cars_Availability" Association="Self.FK_Cars_Availability">
-            <End Role="Availability" EntitySet="Availability" />
-            <End Role="Cars" EntitySet="Cars" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Rental_Cars" Association="Self.FK_Rental_Cars">
-            <End Role="Cars" EntitySet="Cars" />
-            <End Role="Rental" EntitySet="Rental" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Upkeep_Cars" Association="Self.FK_Upkeep_Cars">
-            <End Role="Cars" EntitySet="Cars" />
-            <End Role="Upkeep" EntitySet="Upkeep" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Rental_Clients" Association="Self.FK_Rental_Clients">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="Rental" EntitySet="Rental" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
-            <End Role="Roles" EntitySet="Roles" />
-            <End Role="Users" EntitySet="Users" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -453,101 +454,102 @@
           <EntitySetMapping Name="Actions">
             <EntityTypeMapping TypeName="RentacarDBModel.Actions">
               <MappingFragment StoreEntitySet="Actions">
-                <ScalarProperty Name="ActionID" ColumnName="ActionID" />
                 <ScalarProperty Name="ActionType" ColumnName="ActionType" />
+                <ScalarProperty Name="ActionID" ColumnName="ActionID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Availability">
             <EntityTypeMapping TypeName="RentacarDBModel.Availability">
               <MappingFragment StoreEntitySet="Availability">
-                <ScalarProperty Name="IDAvailability" ColumnName="IDAvailability" />
                 <ScalarProperty Name="AvailabilityState" ColumnName="AvailabilityState" />
+                <ScalarProperty Name="IDAvailability" ColumnName="IDAvailability" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cars">
             <EntityTypeMapping TypeName="RentacarDBModel.Cars">
               <MappingFragment StoreEntitySet="Cars">
-                <ScalarProperty Name="IDCars" ColumnName="IDCars" />
-                <ScalarProperty Name="CarModel" ColumnName="CarModel" />
-                <ScalarProperty Name="CarProdYear" ColumnName="CarProdYear" />
-                <ScalarProperty Name="CarColor" ColumnName="CarColor" />
-                <ScalarProperty Name="RegNumber" ColumnName="RegNumber" />
                 <ScalarProperty Name="IDAvailability" ColumnName="IDAvailability" />
+                <ScalarProperty Name="RegNumber" ColumnName="RegNumber" />
+                <ScalarProperty Name="CarColor" ColumnName="CarColor" />
+                <ScalarProperty Name="CarProdYear" ColumnName="CarProdYear" />
+                <ScalarProperty Name="CarModel" ColumnName="CarModel" />
+                <ScalarProperty Name="IDCars" ColumnName="IDCars" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="RentacarDBModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
-                <ScalarProperty Name="IDClients" ColumnName="IDClients" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="PassportData" ColumnName="PassportData" />
-                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="DLicenseNumber" ColumnName="DLicenseNumber" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="PassportData" ColumnName="PassportData" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="IDClients" ColumnName="IDClients" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Logs">
             <EntityTypeMapping TypeName="RentacarDBModel.Logs">
               <MappingFragment StoreEntitySet="Logs">
-                <ScalarProperty Name="LogID" ColumnName="LogID" />
-                <ScalarProperty Name="IDUsers" ColumnName="IDUsers" />
-                <ScalarProperty Name="LogTime" ColumnName="LogTime" />
                 <ScalarProperty Name="ActionID" ColumnName="ActionID" />
+                <ScalarProperty Name="LogTime" ColumnName="LogTime" />
+                <ScalarProperty Name="IDUsers" ColumnName="IDUsers" />
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Rental">
             <EntityTypeMapping TypeName="RentacarDBModel.Rental">
               <MappingFragment StoreEntitySet="Rental">
-                <ScalarProperty Name="IDRent" ColumnName="IDRent" />
-                <ScalarProperty Name="IDClients" ColumnName="IDClients" />
-                <ScalarProperty Name="IDCars" ColumnName="IDCars" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
                 <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="IDCars" ColumnName="IDCars" />
+                <ScalarProperty Name="IDClients" ColumnName="IDClients" />
+                <ScalarProperty Name="IDRent" ColumnName="IDRent" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Roles">
             <EntityTypeMapping TypeName="RentacarDBModel.Roles">
               <MappingFragment StoreEntitySet="Roles">
-                <ScalarProperty Name="IDRole" ColumnName="IDRole" />
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="IDRole" ColumnName="IDRole" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="RentacarDBModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Upkeep">
             <EntityTypeMapping TypeName="RentacarDBModel.Upkeep">
               <MappingFragment StoreEntitySet="Upkeep">
-                <ScalarProperty Name="IDUpkeep" ColumnName="IDUpkeep" />
-                <ScalarProperty Name="IDCars" ColumnName="IDCars" />
-                <ScalarProperty Name="BeginUpkeepDate" ColumnName="BeginUpkeepDate" />
-                <ScalarProperty Name="EndUpkeepDate" ColumnName="EndUpkeepDate" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="EndUpkeepDate" ColumnName="EndUpkeepDate" />
+                <ScalarProperty Name="BeginUpkeepDate" ColumnName="BeginUpkeepDate" />
+                <ScalarProperty Name="IDCars" ColumnName="IDCars" />
+                <ScalarProperty Name="IDUpkeep" ColumnName="IDUpkeep" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="RentacarDBModel.Users">
               <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="IDUsers" ColumnName="IDUsers" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="IDRole" ColumnName="IDRole" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="IDUsers" ColumnName="IDUsers" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

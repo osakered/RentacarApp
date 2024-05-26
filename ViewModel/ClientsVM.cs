@@ -14,22 +14,23 @@ namespace RentacarApp.ViewModel
     {
         Core db = new Core();
 
-        public void AddClients(string address, string passportdata, string fullname, string dlicensenumber)
+        public void AddClients(string address, string passportdata, string fullname, string dlicensenumber, string phonenumber)
         {
             Clients addClients = new Clients()
             {
                 Address = address,
                 PassportData = passportdata,
                 FullName = fullname,
-                DLicenseNumber = dlicensenumber
+                DLicenseNumber = dlicensenumber,
+                PhoneNumber = phonenumber
             };
             db.context.Clients.Add(addClients);
             db.context.SaveChanges();
         }
 
-        public bool CheckClients(string CHKaddress, string CHKpassportdata, string CHKfullname, string CHKdlicensenumber)
+        public bool CheckClients(string CHKaddress, string CHKpassportdata, string CHKfullname, string CHKdlicensenumber, string CHKphonenumber)
         {
-            if (String.IsNullOrEmpty(CHKaddress) && String.IsNullOrEmpty(CHKpassportdata) && String.IsNullOrEmpty(CHKfullname) && String.IsNullOrEmpty(CHKdlicensenumber))
+            if (String.IsNullOrEmpty(CHKaddress) && String.IsNullOrEmpty(CHKpassportdata) && String.IsNullOrEmpty(CHKfullname) && String.IsNullOrEmpty(CHKdlicensenumber) && String.IsNullOrEmpty(CHKphonenumber))
             {
                 throw new Exception("Заполните поля");
             }
@@ -48,6 +49,10 @@ namespace RentacarApp.ViewModel
             if (String.IsNullOrEmpty(CHKdlicensenumber))
             {
                 throw new Exception("Номер водительского удостоверения не указан");
+            }            
+            if (String.IsNullOrEmpty(CHKphonenumber))
+            {
+                throw new Exception("Номер телефона не указан");
             }
             else
             {

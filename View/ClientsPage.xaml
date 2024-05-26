@@ -39,6 +39,7 @@
                             <DataGridTextColumn Header="№ паспорта" Binding="{Binding PassportData, UpdateSourceTrigger=PropertyChanged}" Width="*"></DataGridTextColumn>
                             <DataGridTextColumn Header="ФИО" Binding="{Binding FullName, UpdateSourceTrigger=PropertyChanged}" Width="*"></DataGridTextColumn>
                             <DataGridTextColumn Header="№ вод. уд." Binding="{Binding DLicenseNumber, UpdateSourceTrigger=PropertyChanged}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="№ телефона" Binding="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Width="*"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
@@ -58,6 +59,8 @@
                         <TextBox Text="{Binding FullName}" x:Name="FullNameTextBox" Height="auto" />
                         <TextBlock Text="Номер водительского удостоверения" FontSize="18px" FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
                         <TextBox Text="{Binding DLicenseNumber}" x:Name="DLicenseNumberTextBox" Height="auto" MinHeight="15"/>
+                        <TextBlock Text="Номер телефона" FontSize="18px" FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
+                        <TextBox Text="{Binding PhoneNumber}" x:Name="PhoneNumberTextBox" Height="auto" MinHeight="15"/>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
                         <UniformGrid Columns="3">

@@ -7,27 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RentacarTests.Model
+namespace RentacarApp.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Clients
+    public partial class Actions
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Clients()
+        public Actions()
         {
-            this.Rental = new HashSet<Rental>();
+            this.Logs = new HashSet<Logs>();
         }
     
-        public int IDClients { get; set; }
-        public string Address { get; set; }
-        public string PassportData { get; set; }
-        public string FullName { get; set; }
-        public string DLicenseNumber { get; set; }
-        public string PhoneNumber { get; set; }
+        public int ActionID { get; set; }
+        public string ActionType { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Rental> Rental { get; set; }
+        public virtual ICollection<Logs> Logs { get; set; }
     }
 }

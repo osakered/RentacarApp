@@ -25,6 +25,7 @@ namespace RentacarApp.Models
         public string PassportData { get; set; }
         public string FullName { get; set; }
         public string DLicenseNumber { get; set; }
+        public string PhoneNumber { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Rental> Rental { get; set; }

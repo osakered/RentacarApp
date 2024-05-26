@@ -25,9 +25,11 @@ namespace RentacarApp.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Actions> Actions { get; set; }
         public virtual DbSet<Availability> Availability { get; set; }
         public virtual DbSet<Cars> Cars { get; set; }
         public virtual DbSet<Clients> Clients { get; set; }
+        public virtual DbSet<Logs> Logs { get; set; }
         public virtual DbSet<Rental> Rental { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }

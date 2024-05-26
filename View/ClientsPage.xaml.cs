@@ -73,10 +73,10 @@ namespace RentacarApp.View
             try
             {
                 ClientsVM clientsVM = new ClientsVM(); 
-                bool checker = clientsVM.CheckClients(AddressTextBox.Text, PassportDataTextBox.Text, FullNameTextBox.Text, DLicenseNumberTextBox.Text);
+                bool checker = clientsVM.CheckClients(AddressTextBox.Text, PassportDataTextBox.Text, FullNameTextBox.Text, DLicenseNumberTextBox.Text, PhoneNumberTextBox.Text);
                 if (checker)
                 {
-                    clientsVM.AddClients(AddressTextBox.Text, PassportDataTextBox.Text, FullNameTextBox.Text, DLicenseNumberTextBox.Text);
+                    clientsVM.AddClients(AddressTextBox.Text, PassportDataTextBox.Text, FullNameTextBox.Text, DLicenseNumberTextBox.Text, PhoneNumberTextBox.Text);
                     MessageBox.Show("Данные о клиенте внесены");
                     DataGridClients.ItemsSource = db.context.Clients.ToList();
                 }
