@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using RentacarApp;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace RentacarTests.Library
 {
@@ -107,6 +109,52 @@ namespace RentacarTests.Library
                 return false;
             }
             if (numbers == String.Empty)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Проверка номера водительского удостоверения
+        /// </summary>
+        /// <param name="licensenumber"></param>
+        /// <returns>
+        /// true - истина
+        /// exception - ошибка
+        /// </returns>
+        public bool StringLicenseNumberCheck(string licensenumber)
+        {
+            string pattern = @"[0-9]{6}[-][0-9]{2}";
+            Regex r = new Regex(pattern);
+            if (!r.IsMatch(licensenumber))
+            {
+                return false;
+            }
+            if (licensenumber == String.Empty)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Проверка ввода Имени/Фамилии/Отчества на правильность
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>
+        /// true - истина
+        /// exception - ошибка
+        /// </returns>
+        public bool StringFIOCheck(string name)
+        {
+            string pattern = @"^[а-яёA-ЯЁ]+-?[а-яёА-ЯЁ]+$";
+            Regex r = new Regex(pattern);
+            if (!r.IsMatch(name))
+            {
+                return false;
+            }
+            if (name == String.Empty)
             {
                 return false;
             }

@@ -51,15 +51,16 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="340">
-                        <TextBlock Text="Модель:" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Модель" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
                         <TextBox Text="{Binding CarModel}" x:Name="ModelTextBox" Height="auto" />
-                        <TextBlock Text="Год выпуска:" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Год выпуска" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
                         <DatePicker Text="{Binding CarProdYear}" x:Name="CarProdYearDatePicker" Height="auto" FontSize="15px" FontFamily="Bahnschrift Light" />
-                        <TextBlock Text="Цвет:" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Цвет" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
                         <TextBox Text="{Binding CarColor}" x:Name="ColorTextBox" Height="auto"/>
-                        <TextBlock Text="Гос. номер:" FontSize="18px" FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Гос. номер" FontSize="18px" FontFamily="Bahnschrift Light" HorizontalAlignment="Center" 
+                                   ToolTip="Государственный регистрационный номер – строка формата «ANNNAA-NN», где N – цифра, A – буква из следующего множества: А, В, Е, К, М, Н, О, Р, С, Т, У, Х"/>
                         <TextBox Text="{Binding RegNumber}" x:Name="RegNumberTextBox" Height="auto" MinHeight="15" />
-                        <TextBlock Text="Статус:" FontSize="18"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Статус" FontSize="18"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
                         <ComboBox SelectedItem="{Binding Availability}" DisplayMemberPath="AvailabilityState" 
                                   SelectedValuePath="IDAvailability" x:Name="AvailabilityComboBox"/> 
                     </StackPanel>

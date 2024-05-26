@@ -9,7 +9,7 @@ using RentacarApp.Models;
 
 namespace RentacarApp.ViewModel
 {
-    internal class UsersVM
+    public class UsersVM
     {
         Core db = new Core();
 
@@ -25,21 +25,21 @@ namespace RentacarApp.ViewModel
             db.context.SaveChanges();
         }
 
-        public bool CheckUsers(string CHKusername, string CHKpassword, object CHKidrole)
+        public bool CheckUsers(string  username, string  password, object  idrole)
         {
-            if (String.IsNullOrEmpty(CHKusername) && String.IsNullOrEmpty(CHKpassword) && CHKidrole == null)
+            if (String.IsNullOrEmpty( username) && String.IsNullOrEmpty( password) &&  idrole == null)
             {
                 throw new Exception("Заполните поля");
             }
-            if (String.IsNullOrEmpty(CHKusername))
+            if (String.IsNullOrEmpty( username))
             {
                 throw new Exception("Логин не введен");
             }            
-            if (String.IsNullOrEmpty(CHKpassword))
+            if (String.IsNullOrEmpty( password))
             {
                 throw new Exception("Пароль не введен");
             }
-            if (CHKidrole == null)
+            if ( idrole == null)
             {
                 throw new Exception("Роль не выбрана");
             }

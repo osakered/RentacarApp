@@ -5,14 +5,16 @@ using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using RentacarApp.Models;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace RentacarApp.ViewModel
 {
-    internal class CarsVM
+    public class CarsVM
     {
-        Core db = new Core();
+        public Core db = new Core();
 
         public void AddCar(string carmodel, DateTime carprodyear, string carcolor, string regnumber, int idavailability)
         {
@@ -45,7 +47,12 @@ namespace RentacarApp.ViewModel
             if (String.IsNullOrEmpty(regnumber))
             {
                 throw new Exception("Госномер не указан");
-            }            
+            }
+            Regex r = new Regex(@"^[АВЕКМНОРСТУХ][0-9]{3}[АВЕКМНОРСТУХ]{2}[-][0-9]{2,3}$");
+            if (!r.IsMatch(regnumber))
+            {
+                throw new Exception("Госномер указан неправильно");
+            }
             if (availability == null)
             {
                 throw new Exception("Статус автомобиля не выбран");

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using RentacarApp.Models;
@@ -27,32 +28,67 @@ namespace RentacarApp.ViewModel
             db.context.Clients.Add(addClients);
             db.context.SaveChanges();
         }
-
-        public bool CheckClients(string CHKaddress, string CHKpassportdata, string CHKfullname, string CHKdlicensenumber, string CHKphonenumber)
+        public bool PhoneCheck(string phone)
         {
-            if (String.IsNullOrEmpty(CHKaddress) && String.IsNullOrEmpty(CHKpassportdata) && String.IsNullOrEmpty(CHKfullname) && String.IsNullOrEmpty(CHKdlicensenumber) && String.IsNullOrEmpty(CHKphonenumber))
+            string phonenumber = "1234567890+-";
+            if (phone == String.Empty)
+            {
+                return false;
+            }
+            if (phone.Length < 11)
+            {
+                return false;
+            }
+            if (phone.Length > 12)
+            {
+                return false;
+            }
+            if (!phone.All(x => phonenumber.Contains(x)))
+            {
+                return false;
+            }
+            if (phone.StartsWith("+7"))
+            {
+                phone.Replace("+7", "8");
+            }
+            return true;
+        }
+
+        public bool CheckClients(string address, string passportdata, string fullname, string dlicensenumber, string phonenumber)
+        {
+            if (String.IsNullOrEmpty(address) && String.IsNullOrEmpty(passportdata) && String.IsNullOrEmpty(fullname) && String.IsNullOrEmpty(dlicensenumber) && String.IsNullOrEmpty(phonenumber))
             {
                 throw new Exception("Заполните поля");
             }
-            if (String.IsNullOrEmpty(CHKaddress))
+            if (String.IsNullOrEmpty(address))
             {
                 throw new Exception("Адрес не указан");
             }
-            if (String.IsNullOrEmpty(CHKpassportdata))
+            if (String.IsNullOrEmpty(passportdata))
             {
                 throw new Exception("Паспортные данные не указаны");
             }
-            if (String.IsNullOrEmpty(CHKfullname))
+            if (String.IsNullOrEmpty(fullname))
             {
                 throw new Exception("ФИО не указано");
             }
-            if (String.IsNullOrEmpty(CHKdlicensenumber))
+            if (String.IsNullOrEmpty(dlicensenumber))
             {
                 throw new Exception("Номер водительского удостоверения не указан");
-            }            
-            if (String.IsNullOrEmpty(CHKphonenumber))
+            }
+            Regex r = new Regex(@"[0-9]{6}[-][0-9]{2}");
+            if (!r.IsMatch(dlicensenumber))
+            {
+                throw new Exception("Номер водительского удостоверения указан неверно");
+            }
+            if (String.IsNullOrEmpty(phonenumber))
             {
                 throw new Exception("Номер телефона не указан");
+            }
+            bool phonechk = PhoneCheck(phonenumber);
+            if (phonechk == false)
+            {
+                throw new Exception("Номер телефона указан неверно");
             }
             else
             {

@@ -408,5 +408,149 @@ namespace RentacarTests
             // Assert
             Assert.IsFalse(result);
         }
+
+        /// <summary>
+        /// Поля содержащие номер водительского удостоверения - введен корректный номер
+        /// Ожидается true
+        /// </summary>
+        [TestMethod]
+        public void TestCorrectStringLicenseNumberCheck_True()
+        {
+            // Arrange
+            string text = "423421-32";
+            // Act
+            TestLibrary library = new TestLibrary();
+            bool result = library.StringLicenseNumberCheck(text);
+            // Assert
+            Assert.IsTrue(result);
+        }       
+        
+        /// <summary>
+        /// Поля содержащие номер водительского удостоверения - введен некорректный номер
+        /// Ожидается false
+        /// </summary>
+        [TestMethod]
+        public void TestCorrectStringLicenseNumberCheck_False()
+        {
+            // Arrange
+            string text = "42342132";
+            // Act
+            TestLibrary library = new TestLibrary();
+            bool result = library.StringLicenseNumberCheck(text);
+            // Assert
+            Assert.IsFalse(result);
+        }      
+        
+        /// <summary>
+        /// Поля содержащие номер водительского удостоверения - введен некорректный номер
+        /// Ожидается false
+        /// </summary>
+        [TestMethod]
+        public void TestCorrectStringLicenseNumberCheck_False2()
+        {
+            // Arrange
+            string text = "4233-32";
+            // Act
+            TestLibrary library = new TestLibrary();
+            bool result = library.StringLicenseNumberCheck(text);
+            // Assert
+            Assert.IsFalse(result);
+        }        
+
+        /// <summary>
+        /// Поля содержащие номер водительского удостоверения - введен номер с буквой
+        /// Ожидается false
+        /// </summary>
+        [TestMethod]
+        public void TestCorrectStringLicenseNumberCheck_False3()
+        {
+            // Arrange
+            string text = "42Д343-32";
+            // Act
+            TestLibrary library = new TestLibrary();
+            bool result = library.StringLicenseNumberCheck(text);
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        /// <summary>
+        /// Поля содержащие номер водительского удостоверения - введены только буквы
+        /// Ожидается false
+        /// </summary>
+        [TestMethod]
+        public void TestCorrectStringLicenseNumberCheck_False4()
+        {
+            // Arrange
+            string text = "буквы";
+            // Act
+            TestLibrary library = new TestLibrary();
+            bool result = library.StringLicenseNumberCheck(text);
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        /// <summary>
+        /// Поля содержащие номер водительского удостоверения - введено пустое поле
+        /// Ожидается false
+        /// </summary>
+        [TestMethod]
+        public void TestCorrectStringLicenseNumberCheck_False5()
+        {
+            // Arrange
+            string text = " ";
+            // Act
+            TestLibrary library = new TestLibrary();
+            bool result = library.StringLicenseNumberCheck(text);
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        /// <summary>
+        /// Поля содержащие фамилию/имя/отчество - имя введено корректно
+        /// Ожидается true
+        /// </summary>
+        [TestMethod]
+        public void TestCorrectFIOCheck_True()
+        {
+            // Arrange
+            string text = "Иван";
+            // Act
+            TestLibrary library = new TestLibrary();
+            bool result = library.StringFIOCheck(text);
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        /// <summary>
+        /// Поля содержащие фамилию/имя/отчество - введено имя на английском
+        /// Ожидается false
+        /// </summary>
+        [TestMethod]
+        public void TestCorrectFIOCheck_False()
+        {
+            // Arrange
+            string text = "Ivan";
+            // Act
+            TestLibrary library = new TestLibrary();
+            bool result = library.StringFIOCheck(text);
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        /// <summary>
+        /// Поля содержащие фамилию/имя/отчество - имя введено с цифрами
+        /// Ожидается false
+        /// </summary>
+        [TestMethod]
+        public void TestCorrectFIOCheck_False2()
+        {
+            // Arrange
+            string text = "Иван2005";
+            // Act
+            TestLibrary library = new TestLibrary();
+            bool result = library.StringFIOCheck(text);
+            // Assert
+            Assert.IsFalse(result);
+        }
     }
 }
