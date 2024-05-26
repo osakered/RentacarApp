@@ -20,13 +20,17 @@
                 <TextBlock Text="Формирование отчетов" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center" VerticalAlignment="Center" />
             </StackPanel>
         </Border>
-        <DataGrid x:Name="DataGridReports" Grid.Row="1" AutoGenerateColumns="False" IsEnabled="True" FontFamily="Bahnschrift Light">
+        <DataGrid x:Name="DataGridReports" Grid.Row="1" AutoGenerateColumns="False" IsEnabled="True" IsReadOnly="True" FontFamily="Bahnschrift Light">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="ID Авто" Binding="{Binding IDCars}"  Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Модель" Binding="{Binding CarModel}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Год" Binding="{Binding CarProdYear, StringFormat = {}{0:dd/MM/yyyy}}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Цвет" Binding="{Binding CarColor}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Госномер" Binding="{Binding RegNumber}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Статус" Binding="{Binding Availability.AvailabilityState}" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-            <ComboBox Name="FilterComboBox" SelectionChanged="FilterComboBoxSelectionChanged" Width="150px" Height="20px"></ComboBox>
             <Button x:Name="SaveButton" Click="SaveButton_Click" 
                     Content="Сохранить"  Width="100px"  Background="#cacaca"  FontFamily="Bahnschrift" Height="auto"/>
             <Button x:Name="BackButton" Click="BackButton_Click" 

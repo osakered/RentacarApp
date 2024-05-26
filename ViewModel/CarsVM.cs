@@ -18,6 +18,13 @@ namespace RentacarApp.ViewModel
 
         public void AddCar(string carmodel, DateTime carprodyear, string carcolor, string regnumber, int idavailability)
         {
+            //Logs addLogs = new Logs()
+            //{
+            //    IDUsers = CurrentUser,
+            //    LogTime = DateTime.Now,
+            //    ActionID = 1
+            //};
+
             Cars addCars = new Cars()
             {
                 CarModel = carmodel,
