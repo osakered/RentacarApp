@@ -41,7 +41,7 @@ namespace RentacarApp.View
             try
             {
                 UpkeepVM upkeepVM = new UpkeepVM();
-                bool checker = upkeepVM.CheckUpkeep(CarsComboBox.SelectedValue, PriceTextBox.Text); 
+                bool checker = upkeepVM.CheckUpkeep(CarsComboBox.SelectedValue, PriceTextBox.Text, Convert.ToDateTime(BeginUpkeepDatePicker.SelectedDate), Convert.ToDateTime(EndUpkeepDatePicker.SelectedDate)); 
                 if (checker)
                 {
                     upkeepVM.AddUpkeep((int)CarsComboBox.SelectedValue, Convert.ToDateTime(BeginUpkeepDatePicker.SelectedDate), Convert.ToDateTime(EndUpkeepDatePicker.SelectedDate), PriceTextBox.Text);

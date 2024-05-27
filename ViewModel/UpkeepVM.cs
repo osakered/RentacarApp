@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
@@ -39,7 +40,7 @@ namespace RentacarApp.ViewModel
             db.context.SaveChanges();
         }
 
-        public bool CheckUpkeep(object car, string cost)
+        public bool CheckUpkeep(object car, string cost, DateTime start, DateTime end)
         {
             if (car == null && String.IsNullOrEmpty(cost))
             {
@@ -56,6 +57,10 @@ namespace RentacarApp.ViewModel
             if (!cost.All(char.IsDigit)) 
             {
                 throw new Exception("Цена введена некорректно");
+            }
+            if (start > end)
+            {
+                throw new Exception("Дата начала не может быть больше даты окончания");
             }
             else
             {

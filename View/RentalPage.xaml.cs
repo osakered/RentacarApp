@@ -41,7 +41,7 @@ namespace RentacarApp.View
             try
             {
                 RentalVM RentVM = new RentalVM();
-                bool checker = RentVM.CheckRental(ClientsComboBox.SelectedValue, CarsComboBox.SelectedValue, CostTextBox.Text); 
+                bool checker = RentVM.CheckRental(ClientsComboBox.SelectedValue, CarsComboBox.SelectedValue, CostTextBox.Text, Convert.ToDateTime(DateStartPicker.SelectedDate), Convert.ToDateTime(DateEndPicker.SelectedDate)); 
                 if (checker)
                 {
                     RentVM.AddRental((int)ClientsComboBox.SelectedValue, (int)CarsComboBox.SelectedValue, CostTextBox.Text, Convert.ToDateTime(DateStartPicker.SelectedDate), Convert.ToDateTime(DateEndPicker.SelectedDate));

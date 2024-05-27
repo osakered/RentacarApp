@@ -40,7 +40,7 @@ namespace RentacarApp.ViewModel
             db.context.SaveChanges();
         }
 
-        public bool CheckRental(object client, object car, string cost)
+        public bool CheckRental(object client, object car, string cost, DateTime start, DateTime end)
         {
             if (client == null && car == null && String.IsNullOrEmpty(cost))
             {
@@ -61,6 +61,10 @@ namespace RentacarApp.ViewModel
             if (!cost.All(char.IsDigit)) 
             {
                 throw new Exception("Стоимость указана некорректно");
+            }            
+            if (start > end) 
+            {
+                throw new Exception("Дата начала не может быть больше даты окончания");
             }
             else
             {
