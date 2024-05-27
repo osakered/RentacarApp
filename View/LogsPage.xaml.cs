@@ -23,6 +23,7 @@ namespace RentacarApp.View
     public partial class LogsPage : Page
     {
         Core db = new Core();
+        List <Logs> logView = new List<Logs>();
         public LogsPage()
         {
             InitializeComponent();
@@ -40,6 +41,31 @@ namespace RentacarApp.View
             {
                 MessageBox.Show("До этого не было открыто ни одной страницы");
             }
+        }
+        private void YearButton_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime year = DateTime.Today.AddDays(-365);
+            logView = db.context.Logs.Where(x => x.LogTime >=  year).ToList();
+            DataGridLogs.ItemsSource = logView;
+        }
+
+        private void MonthButton_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime month = DateTime.Today.AddDays(-30);
+            logView = db.context.Logs.Where(x => x.LogTime >= month).ToList();
+            DataGridLogs.ItemsSource = logView;
+        }
+
+        private void WeekButton_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime week = DateTime.Today.AddDays(-7);
+            logView = db.context.Logs.Where(x => x.LogTime >= week).ToList();
+            DataGridLogs.ItemsSource = logView;
+        }
+
+        private void AllTimeButton_Click(object sender, RoutedEventArgs e)
+        {
+            DataGridLogs.ItemsSource = db.context.Logs.ToList();
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)

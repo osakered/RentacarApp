@@ -35,6 +35,16 @@
             <Button x:Name="BackButton" Click="BackButton_Click" 
                     Content="Назад"  Width="70px"  Background="#cacaca"  FontFamily="Bahnschrift" Height="auto"/>
         </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <Button x:Name="YearButton" Click="YearButton_Click" 
+                    Content="За год"  Width="70px"  Background="#cacaca"  FontFamily="Bahnschrift" Height="auto"/>  
+            <Button x:Name="MonthButton" Click="MonthButton_Click" 
+                    Content="За месяц"  Width="70px"  Background="#cacaca"  FontFamily="Bahnschrift" Height="auto"/>  
+            <Button x:Name="WeekButton" Click="WeekButton_Click" 
+                    Content="За неделю"  Width="70px"  Background="#cacaca"  FontFamily="Bahnschrift" Height="auto"/>               
+            <Button x:Name="AllTimeButton" Click="AllTimeButton_Click" 
+                    Content="За все время"  Width="80px"  Background="#cacaca"  FontFamily="Bahnschrift" Height="auto"/>            
+        </StackPanel>
         <StackPanel Grid.Row="2" Background="#ebebeb">
         </StackPanel>
     </Grid>
