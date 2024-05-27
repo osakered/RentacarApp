@@ -36,6 +36,9 @@ namespace RentacarApp.View
             DataGridCars.ItemsSource = db.context.Cars.ToList(); 
         }
 
+        /// <summary>
+        /// Возврат на предыдущую страницу
+        /// </summary>
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             if (this.NavigationService.CanGoBack)
@@ -48,6 +51,9 @@ namespace RentacarApp.View
             }
         }
 
+        /// <summary>
+        /// Удаление авто, выбранного в DataGrid
+        /// </summary>
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             if (DataGridCars.SelectedItem != null)
@@ -75,6 +81,9 @@ namespace RentacarApp.View
                 MessageBox.Show("Автомобиль для удаления не выбран");
             }
         }
+        /// <summary>
+        /// Добавление авто
+        /// </summary>
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -93,6 +102,9 @@ namespace RentacarApp.View
                 MessageBox.Show(ex.Message); 
             }
         }
+        /// <summary>
+        /// Получение выбранной ячейки в DataGrid и ее редактирование
+        /// </summary>
         private void DataGridCars_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
             if (e.EditAction == DataGridEditAction.Commit)
@@ -100,7 +112,18 @@ namespace RentacarApp.View
                 var EditRow = e.Row.Item as Cars;
                 db.context.Entry(EditRow).State = EntityState.Modified;
                 db.context.SaveChanges();
+
+                Logs addLogs = new Logs()
+                {
+                    IDUsers = Properties.Settings.Default.idUser,
+                    LogTime = DateTime.Now,
+                    ActionID = 2,
+                    TableName = "Автомобили"
+                };
+                db.context.Logs.Add(addLogs);
+                db.context.SaveChanges();
             }
+
         }
     }
 }

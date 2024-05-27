@@ -8,13 +8,26 @@ using System.Threading.Tasks;
 using RentacarApp.Models;
 
 namespace RentacarApp.ViewModel
-{
+{    
+     /// <summary>
+     /// Логика кнопок страницы UpkeepPage.xaml
+     /// </summary>
     internal class UpkeepVM
     {
         Core db = new Core();
 
         public void AddUpkeep(int idcars, DateTime beginupkeepdate, DateTime endupkeepdate, string price)
         {
+            Logs addLogs = new Logs()
+            {
+                IDUsers = Properties.Settings.Default.idUser,
+                LogTime = DateTime.Now,
+                ActionID = 1,
+                TableName = "Обслуживание"
+            };
+            db.context.Logs.Add(addLogs);
+            db.context.SaveChanges();
+
             Upkeep addUpkeep = new Upkeep()
             {
                 IDCars = idcars,
@@ -52,6 +65,16 @@ namespace RentacarApp.ViewModel
 
         public void DeleteUpkeep(int idUpkeep)
         {
+            Logs addLogs = new Logs()
+            {
+                IDUsers = Properties.Settings.Default.idUser,
+                LogTime = DateTime.Now,
+                ActionID = 3,
+                TableName = "Обслуживание"
+            };
+            db.context.Logs.Add(addLogs);
+            db.context.SaveChanges();
+
             Upkeep delUpkeep = db.context.Upkeep.FirstOrDefault(x => x.IDUpkeep == idUpkeep);
             db.context.Upkeep.Remove(delUpkeep);
             db.context.SaveChanges();

@@ -9,12 +9,25 @@ using RentacarApp.Models;
 
 namespace RentacarApp.ViewModel
 {
+    /// <summary>
+    /// Логика кнопок страницы RentalPage.xaml
+    /// </summary>
     internal class RentalVM
     {
         Core db = new Core();
 
         public void AddRental(int idclient, int idcar, string cost, DateTime datestart, DateTime dateend)
         {
+            Logs addLogs = new Logs()
+            {
+                IDUsers = Properties.Settings.Default.idUser,
+                LogTime = DateTime.Now,
+                ActionID = 1,
+                TableName = "Аренда"
+            };
+            db.context.Logs.Add(addLogs);
+            db.context.SaveChanges();
+
             Rental addRental = new Rental()
             {
                 IDClients = idclient,
@@ -57,6 +70,16 @@ namespace RentacarApp.ViewModel
 
         public void DeleteRent(int idRent)
         {
+            Logs addLogs = new Logs()
+            {
+                IDUsers = Properties.Settings.Default.idUser,
+                LogTime = DateTime.Now,
+                ActionID = 3,
+                TableName = "Аренда"
+            };
+            db.context.Logs.Add(addLogs);
+            db.context.SaveChanges();
+
             Rental delRent = db.context.Rental.FirstOrDefault(x => x.IDRent == idRent);
             db.context.Rental.Remove(delRent);
             db.context.SaveChanges();

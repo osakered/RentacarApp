@@ -28,6 +28,9 @@ namespace RentacarApp.Pages
         {
             InitializeComponent(); 
         }
+        /// <summary>
+        /// Кнопка входа в программу
+        /// </summary>
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             string username = TextBoxUsername.Text;
@@ -41,6 +44,7 @@ namespace RentacarApp.Pages
                     if (password.Equals(user.Password))
                     {
                         int idRole = user.IDRole;
+                        Properties.Settings.Default.idUser = user.IDUsers;
                         switch (idRole)
                         {
                             case 1:

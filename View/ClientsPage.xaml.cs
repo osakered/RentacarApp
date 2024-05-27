@@ -31,7 +31,6 @@ namespace RentacarApp.View
 
             DataGridClients.ItemsSource = db.context.Clients.ToList(); 
         }
-
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             if (this.NavigationService.CanGoBack)
@@ -94,6 +93,15 @@ namespace RentacarApp.View
                 var EditRow = e.Row.Item as Clients;
                 db.context.Entry(EditRow).State = EntityState.Modified;
                 db.context.SaveChanges();
+
+                Logs addLogs = new Logs()
+                {
+                    IDUsers = Properties.Settings.Default.idUser,
+                    LogTime = DateTime.Now,
+                    ActionID = 2,
+                    TableName = "Клиенты"
+                };
+                db.context.Logs.Add(addLogs);
             }
         }
     }

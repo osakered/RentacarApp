@@ -14,11 +14,19 @@ namespace RentacarApp.Models
     
     public partial class Users
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Users()
+        {
+            this.Logs = new HashSet<Logs>();
+        }
+    
         public int IDUsers { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public int IDRole { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Logs> Logs { get; set; }
         public virtual Roles Roles { get; set; }
     }
 }

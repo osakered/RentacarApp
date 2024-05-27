@@ -12,18 +12,24 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace RentacarApp.ViewModel
 {
+    /// <summary>
+    /// Логика кнопок страницы CarsPage.xaml
+    /// </summary>
     public class CarsVM
     {
         public Core db = new Core();
 
         public void AddCar(string carmodel, DateTime carprodyear, string carcolor, string regnumber, int idavailability)
         {
-            //Logs addLogs = new Logs()
-            //{
-            //    IDUsers = CurrentUser,
-            //    LogTime = DateTime.Now,
-            //    ActionID = 1
-            //};
+            Logs addLogs = new Logs()
+            {
+                IDUsers = Properties.Settings.Default.idUser,
+                LogTime = DateTime.Now,
+                ActionID = 1,
+                TableName = "Автомобили"
+            };
+            db.context.Logs.Add(addLogs);
+            db.context.SaveChanges();
 
             Cars addCars = new Cars()
             {
@@ -72,6 +78,16 @@ namespace RentacarApp.ViewModel
 
         public void DeleteCar(int idCar) 
         {
+            Logs addLogs = new Logs()
+            {
+                IDUsers = Properties.Settings.Default.idUser,
+                LogTime = DateTime.Now,
+                ActionID = 3,
+                TableName = "Автомобили"
+            };
+            db.context.Logs.Add(addLogs);
+            db.context.SaveChanges();
+
             Cars delCar = db.context.Cars.FirstOrDefault(x=>x.IDCars == idCar);
 
             db.context.Cars.Remove(delCar);

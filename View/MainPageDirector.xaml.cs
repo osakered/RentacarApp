@@ -19,8 +19,9 @@ namespace RentacarApp.View
 {
     /// <summary>
     /// Логика взаимодействия для MainPageDirector.xaml
+    /// Страница содержит только кнопки для переходов на прочие страницы
     /// </summary>
-    public partial class MainPageDirector : Page //Главная страница Директора
+    public partial class MainPageDirector : Page 
     {
         public MainPageDirector()
         {
@@ -29,42 +30,42 @@ namespace RentacarApp.View
 
         private void ReportsButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new ReportsPage()); // Переход на страницу создания отчетов
+            this.NavigationService.Navigate(new ReportsPage()); 
         }
 
         private void UsersButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new UsersPage()); // Переход на страницу пользователей
+            this.NavigationService.Navigate(new UsersPage()); 
         }
 
         private void ClientsButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new ClientsPage()); // Переход на страницу клиентов
+            this.NavigationService.Navigate(new ClientsPage());
         }
 
         private void UpkeepButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new UpkeepPage()); // Переход на страницу с обслуживанием авто
+            this.NavigationService.Navigate(new UpkeepPage());
         }
 
         private void RentalButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new RentalPage()); // Переход на страницу с арендой
+            this.NavigationService.Navigate(new RentalPage()); 
         }
 
         private void CarsButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new CarsPage()); // Переход на страницу с автомобилями
+            this.NavigationService.Navigate(new CarsPage()); 
         }
 
         private void LogOutButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new AuthPage()); // Выход из "аккаунта"
+            this.NavigationService.Navigate(new AuthPage());
         }
 
         private void ActionJournalButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new LogsPage()); // Журнал Действий
+            this.NavigationService.Navigate(new LogsPage()); 
         }
     }
 }

@@ -18,8 +18,9 @@ namespace RentacarApp.View
 {
     /// <summary>
     /// Логика взаимодействия для MainPageManager.xaml
+    /// Страница содержит только кнопки для переходов на прочие страницы
     /// </summary>
-    public partial class MainPageManager : Page // Главная страница Менеджера
+    public partial class MainPageManager : Page 
     {
         public MainPageManager()
         {
@@ -28,27 +29,27 @@ namespace RentacarApp.View
 
         private void LogOutButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new AuthPage()); // Выход из "аккаунта"
+            this.NavigationService.Navigate(new AuthPage()); 
         }
 
         private void ClientsButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new ClientsPage()); // Переход на страницу клиентов
+            this.NavigationService.Navigate(new ClientsPage());
         }
 
         private void UpkeepButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new UpkeepPage()); // Переход на страницу с обслуживанием авто
+            this.NavigationService.Navigate(new UpkeepPage());
         }
 
         private void RentalButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new RentalPage()); // Переход на страницу с арендой
+            this.NavigationService.Navigate(new RentalPage());
         }
 
         private void CarsButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new CarsPage()); // Переход на страницу с автомобилями
+            this.NavigationService.Navigate(new CarsPage());
         }
     }
 }

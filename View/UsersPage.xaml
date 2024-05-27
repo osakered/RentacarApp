@@ -37,7 +37,7 @@
                             <DataGridTextColumn Header="ID Пользователя" Binding="{Binding IDUsers}" IsReadOnly="True" Width="*"></DataGridTextColumn>
                             <DataGridTextColumn Header="Логин" Binding="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Width="*"></DataGridTextColumn>
                             <DataGridTextColumn Header="Пароль" Binding="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Width="*"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Роль" Binding="{Binding IDRole, UpdateSourceTrigger=PropertyChanged}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Роль" Binding="{Binding Roles.RoleName, UpdateSourceTrigger=PropertyChanged}" Width="*"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

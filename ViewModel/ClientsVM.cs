@@ -11,12 +11,25 @@ using RentacarApp.Models;
 
 namespace RentacarApp.ViewModel
 {
+    /// <summary>
+    /// Логика кнопок страницы ClientsPage.xaml
+    /// </summary>
     internal class ClientsVM
     {
         Core db = new Core();
 
         public void AddClients(string address, string passportdata, string fullname, string dlicensenumber, string phonenumber)
         {
+            Logs addLogs = new Logs()
+            {
+                IDUsers = Properties.Settings.Default.idUser,
+                LogTime = DateTime.Now,
+                ActionID = 1,
+                TableName = "Клиенты"
+            };
+            db.context.Logs.Add(addLogs);
+            db.context.SaveChanges();
+
             Clients addClients = new Clients()
             {
                 Address = address,
@@ -98,6 +111,16 @@ namespace RentacarApp.ViewModel
 
         public void DeleteClient(int idClient)
         {
+            Logs addLogs = new Logs()
+            {
+                IDUsers = Properties.Settings.Default.idUser,
+                LogTime = DateTime.Now,
+                ActionID = 3,
+                TableName = "Клиенты"
+            };
+            db.context.Logs.Add(addLogs);
+            db.context.SaveChanges();
+
             Clients delClient = db.context.Clients.FirstOrDefault(x => x.IDClients == idClient);
             db.context.Clients.Remove(delClient);
             db.context.SaveChanges();

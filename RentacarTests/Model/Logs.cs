@@ -18,7 +18,9 @@ namespace RentacarTests.Model
         public int IDUsers { get; set; }
         public System.DateTime LogTime { get; set; }
         public int ActionID { get; set; }
+        public string TableName { get; set; }
     
         public virtual Actions Actions { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

@@ -7,6 +7,9 @@ using RentacarApp.Models;
 
 namespace RentacarApp.ViewModel
 {
+    /// <summary>
+    /// Класс проверок страницы авторизации на корректный ввод данных
+    /// </summary>
     public static class AuthVM
     {
         public static Core db = new Core();

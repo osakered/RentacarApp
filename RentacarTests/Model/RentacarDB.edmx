@@ -49,6 +49,7 @@
           <Property Name="IDUsers" Type="int" Nullable="false" />
           <Property Name="LogTime" Type="datetime" Nullable="false" />
           <Property Name="ActionID" Type="int" Nullable="false" />
+          <Property Name="TableName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Rental">
           <Key>
@@ -122,6 +123,20 @@
             </Principal>
             <Dependent Role="Logs">
               <PropertyRef Name="ActionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Logs_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Logs" Type="Self.Logs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IDUsers" />
+            </Principal>
+            <Dependent Role="Logs">
+              <PropertyRef Name="IDUsers" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -200,6 +215,10 @@
             <End Role="Actions" EntitySet="Actions" />
             <End Role="Logs" EntitySet="Logs" />
           </AssociationSet>
+          <AssociationSet Name="FK_Logs_Users" Association="Self.FK_Logs_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Logs" EntitySet="Logs" />
+          </AssociationSet>
           <AssociationSet Name="FK_Rental_Cars" Association="Self.FK_Rental_Cars">
             <End Role="Cars" EntitySet="Cars" />
             <End Role="Rental" EntitySet="Rental" />
@@ -251,6 +270,10 @@
           <AssociationSet Name="FK_Rental_Clients" Association="RentacarDBModel.FK_Rental_Clients">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Rental" EntitySet="Rental" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Logs_Users" Association="RentacarDBModel.FK_Logs_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Logs" EntitySet="Logs" />
           </AssociationSet>
           <AssociationSet Name="FK_Users_Roles" Association="RentacarDBModel.FK_Users_Roles">
             <End Role="Roles" EntitySet="Roles" />
@@ -307,7 +330,9 @@
           <Property Name="IDUsers" Type="Int32" Nullable="false" />
           <Property Name="LogTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ActionID" Type="Int32" Nullable="false" />
+          <Property Name="TableName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Actions" Relationship="RentacarDBModel.FK_Logs_Actions" FromRole="Logs" ToRole="Actions" />
+          <NavigationProperty Name="Users" Relationship="RentacarDBModel.FK_Logs_Users" FromRole="Logs" ToRole="Users" />
         </EntityType>
         <EntityType Name="Rental">
           <Key>
@@ -359,6 +384,7 @@
           <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IDRole" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Logs" Relationship="RentacarDBModel.FK_Logs_Users" FromRole="Users" ToRole="Logs" />
           <NavigationProperty Name="Roles" Relationship="RentacarDBModel.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
         </EntityType>
         <Association Name="FK_Logs_Actions">
@@ -431,6 +457,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Logs_Users">
+          <End Type="RentacarDBModel.Users" Role="Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="RentacarDBModel.Logs" Role="Logs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IDUsers" />
+            </Principal>
+            <Dependent Role="Logs">
+              <PropertyRef Name="IDUsers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Users_Roles">
           <End Type="RentacarDBModel.Roles" Role="Roles" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -445,7 +485,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -494,6 +534,7 @@
           <EntitySetMapping Name="Logs">
             <EntityTypeMapping TypeName="RentacarDBModel.Logs">
               <MappingFragment StoreEntitySet="Logs">
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
                 <ScalarProperty Name="ActionID" ColumnName="ActionID" />
                 <ScalarProperty Name="LogTime" ColumnName="LogTime" />
                 <ScalarProperty Name="IDUsers" ColumnName="IDUsers" />

@@ -5,21 +5,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="95702b726b614c44b26b13665411f148" Name="Diagram1">
-        <EntityTypeShape EntityType="RentacarDBModel.Actions" Width="1.5" PointX="7.75" PointY="4.125" />
+        <EntityTypeShape EntityType="RentacarDBModel.Actions" Width="1.5" PointX="10" PointY="5.375" />
         <EntityTypeShape EntityType="RentacarDBModel.Availability" Width="1.5" PointX="0.75" PointY="3" />
         <EntityTypeShape EntityType="RentacarDBModel.Cars" Width="1.5" PointX="3" PointY="2.5" />
         <EntityTypeShape EntityType="RentacarDBModel.Clients" Width="1.5" PointX="3" PointY="7.625" />
-        <EntityTypeShape EntityType="RentacarDBModel.Logs" Width="1.5" PointX="10" PointY="3.875" />
+        <EntityTypeShape EntityType="RentacarDBModel.Logs" Width="1.5" PointX="12.25" PointY="1" />
         <EntityTypeShape EntityType="RentacarDBModel.Rental" Width="1.5" PointX="5.25" PointY="2.5" />
-        <EntityTypeShape EntityType="RentacarDBModel.Roles" Width="1.5" PointX="7.75" PointY="1.125" />
-        <EntityTypeShape EntityType="RentacarDBModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="6.75" />
+        <EntityTypeShape EntityType="RentacarDBModel.Roles" Width="1.5" PointX="7.75" PointY="1.375" />
+        <EntityTypeShape EntityType="RentacarDBModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="7.75" />
         <EntityTypeShape EntityType="RentacarDBModel.Upkeep" Width="1.5" PointX="5.25" PointY="6" />
-        <EntityTypeShape EntityType="RentacarDBModel.Users" Width="1.5" PointX="10" PointY="0.875" />
+        <EntityTypeShape EntityType="RentacarDBModel.Users" Width="1.5" PointX="10" PointY="1" />
         <AssociationConnector Association="RentacarDBModel.FK_Logs_Actions" />
         <AssociationConnector Association="RentacarDBModel.FK_Cars_Availability" />
         <AssociationConnector Association="RentacarDBModel.FK_Rental_Cars" />
         <AssociationConnector Association="RentacarDBModel.FK_Upkeep_Cars" />
         <AssociationConnector Association="RentacarDBModel.FK_Rental_Clients" />
+        <AssociationConnector Association="RentacarDBModel.FK_Logs_Users" />
         <AssociationConnector Association="RentacarDBModel.FK_Users_Roles" />
       </Diagram>
     </edmx:Diagrams>

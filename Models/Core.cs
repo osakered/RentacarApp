@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace RentacarApp.Models
 {
+    /// <summary>
+    /// Подключение базы данных
+    /// </summary>
     public class Core
     {
         public RentacarDBEntities context = new RentacarDBEntities(); 

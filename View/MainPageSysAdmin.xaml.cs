@@ -19,8 +19,9 @@ namespace RentacarApp.View
 {
     /// <summary>
     /// Логика взаимодействия для MainPageSysAdmin.xaml
+    /// Страница содержит только кнопки для переходов на прочие страницы
     /// </summary>
-    public partial class MainPageSysAdmin : Page // Главная страница Системного Администратора
+    public partial class MainPageSysAdmin : Page 
     {
         public MainPageSysAdmin()
         {
@@ -29,37 +30,37 @@ namespace RentacarApp.View
 
         private void CarsButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new CarsPage()); // Переход на страницу с автомобилями
+            this.NavigationService.Navigate(new CarsPage());
         }
 
         private void RentalButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new RentalPage()); // Переход на страницу с арендой
+            this.NavigationService.Navigate(new RentalPage()); 
         }
 
         private void UpkeepButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new UpkeepPage()); // Переход на страницу с обслуживанием авто
+            this.NavigationService.Navigate(new UpkeepPage());
         }
 
         private void ClientsButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new ClientsPage()); // Переход на страницу клиентов
+            this.NavigationService.Navigate(new ClientsPage());
         }
 
         private void UsersButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new UsersPage()); // Переход на страницу пользователей
+            this.NavigationService.Navigate(new UsersPage());
         }
 
         private void LogOutButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new AuthPage()); // Выход из "аккаунта"
+            this.NavigationService.Navigate(new AuthPage());
         }
 
         private void ActionJournalButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new LogsPage()); // Журнал действий
+            this.NavigationService.Navigate(new LogsPage());
         }
     }
 }
