@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using RentacarApp.Models;
+using System.Text.RegularExpressions;
 
 namespace RentacarApp.ViewModel
 {
@@ -38,21 +39,26 @@ namespace RentacarApp.ViewModel
             db.context.SaveChanges();
         }
 
-        public bool CheckUsers(string  username, string  password, object  idrole)
+        public bool CheckUsers(string username, string password, object idrole)
         {
-            if (String.IsNullOrEmpty( username) && String.IsNullOrEmpty( password) &&  idrole == null)
+            if (String.IsNullOrEmpty(username) && String.IsNullOrEmpty(password) && idrole == null)
             {
                 throw new Exception("Заполните поля");
             }
-            if (String.IsNullOrEmpty( username))
+            if (String.IsNullOrEmpty(username))
             {
                 throw new Exception("Логин не введен");
             }            
-            if (String.IsNullOrEmpty( password))
+            if (String.IsNullOrEmpty(password))
             {
                 throw new Exception("Пароль не введен");
             }
-            if ( idrole == null)
+            Regex r = new Regex(@"^[a-zA-Z0-9$@$!%*?&#^-_. +]+$");
+            if (!r.IsMatch(username) || !r.IsMatch(password))
+            {
+                throw new Exception("Разрешено использование только латинских букв, символов и чисел");
+            }
+            if (idrole == null)
             {
                 throw new Exception("Роль не выбрана");
             }

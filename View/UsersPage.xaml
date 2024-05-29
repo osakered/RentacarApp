@@ -49,9 +49,17 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="340">
-                        <TextBlock Text="Логин" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="Логин" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
+                            <Image Source="/Assets/ques.png" Width="15" Margin="10 0 0 0" 
+                                   ToolTip="Логин может содержать только латинские буквы, символы и цифры"></Image>
+                        </StackPanel>
                         <TextBox Text="{Binding Username}" x:Name="UsernameTextBox" Height="auto" />
-                        <TextBlock Text="Пароль" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="Пароль" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
+                            <Image Source="/Assets/ques.png" Width="15" Margin="10 0 0 0" 
+                                   ToolTip="Пароль может содержать только латинские буквы, символы и цифры."></Image>
+                        </StackPanel>
                         <TextBox Text="{Binding Password}" x:Name="PasswordTextBox" Height="auto"/>
                         <TextBlock Text="Роль" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
                         <ComboBox SelectedItem="{Binding IDRole}" DisplayMemberPath="" SelectedValuePath="" x:Name="RoleComboBox"/>

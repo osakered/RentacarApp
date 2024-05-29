@@ -81,6 +81,11 @@ namespace RentacarApp.ViewModel
             {
                 throw new Exception("Паспортные данные не указаны");
             }
+            Regex rr = new Regex(@"[0-9]{4}[\s][0-9]{6}");
+            if (!rr.IsMatch(passportdata)) 
+            {
+                throw new Exception("Паспортные данные указаны неверно");
+            }
             if (String.IsNullOrEmpty(fullname))
             {
                 throw new Exception("ФИО не указано");

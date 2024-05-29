@@ -53,11 +53,20 @@
                     <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="340">
                         <TextBlock Text="Адрес:" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
                         <TextBox Text="{Binding Address}" x:Name="AddressTextBox" Height="auto"/>
-                        <TextBlock Text="Паспортные данные:" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="Паспортные данные" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
+                            <Image Source="/Assets/ques.png" Width="15" Margin="10 0 0 0" 
+                                   ToolTip="Номер паспорта – строка формата «SSSS NNNNNN», где S – четырехзначный номер серии паспорта, N – шестизначный номер самого паспорта"></Image>
+                        </StackPanel>
                         <TextBox Text="{Binding PassportData}" x:Name="PassportDataTextBox" Height="auto"/>
                         <TextBlock Text="ФИО:" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
                         <TextBox Text="{Binding FullName}" x:Name="FullNameTextBox" Height="auto" />
-                        <TextBlock Text="Номер водительского удостоверения" FontSize="18px" FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="Номер водительского удостоверения" FontSize="18px"  FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
+                            <Image Source="/Assets/ques.png" Width="15" Margin="10 0 0 0" 
+                                   ToolTip="No водительского удостоверения – строка формата «NNNNNN-YY», где NNNN – порядковый номер удостоверения (цифры), YY – последние две цифры номера года выдачи удостоверения;"> 
+                            </Image>
+                        </StackPanel>
                         <TextBox Text="{Binding DLicenseNumber}" x:Name="DLicenseNumberTextBox" Height="auto" MinHeight="15"/>
                         <TextBlock Text="Номер телефона" FontSize="18px" FontFamily="Bahnschrift Light" HorizontalAlignment="Center"/>
                         <TextBox Text="{Binding PhoneNumber}" x:Name="PhoneNumberTextBox" Height="auto" MinHeight="15"/>
