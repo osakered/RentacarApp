@@ -17,7 +17,7 @@ namespace RentacarApp.ViewModel
     /// </summary>
     public class CarsVM
     {
-        public Core db = new Core();
+        Core db = new Core();
 
         public void AddCar(string carmodel, DateTime carprodyear, string carcolor, string regnumber, int idavailability)
         {
@@ -91,6 +91,19 @@ namespace RentacarApp.ViewModel
             Cars delCar = db.context.Cars.FirstOrDefault(x=>x.IDCars == idCar);
 
             db.context.Cars.Remove(delCar);
+            db.context.SaveChanges();
+        }
+
+        public void AddLog_Edit()
+        {
+            Logs addLogs = new Logs()
+            {
+                IDUsers = Properties.Settings.Default.idUser,
+                LogTime = DateTime.Now,
+                ActionID = 2,
+                TableName = "Автомобили"
+            };
+            db.context.Logs.Add(addLogs);
             db.context.SaveChanges();
         }
     }

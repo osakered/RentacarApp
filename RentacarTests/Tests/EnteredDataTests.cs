@@ -88,7 +88,6 @@ namespace RentacarTests
             Assert.IsTrue(result);
         }        
         
-        
         /// <summary>
         /// Поля содержащие госномер авто - введен правильный номер с трехзначным регионом
         /// Ожидается true
@@ -506,49 +505,49 @@ namespace RentacarTests
         }
 
         /// <summary>
-        /// Поля содержащие фамилию/имя/отчество - имя введено корректно
-        /// Ожидается true
+        /// Поля содержащие паспортные данные - введены корректные данные
+        /// Ожидается True
         /// </summary>
         [TestMethod]
-        public void TestCorrectFIOCheck_True()
+        public void TestCorrectStringPassportDataCheck_True()
         {
             // Arrange
-            string text = "Иван";
+            string text = "4231 432564";
             // Act
             TestLibrary library = new TestLibrary();
-            bool result = library.StringFIOCheck(text);
+            bool result = library.StringPassportDataCheck(text);
             // Assert
             Assert.IsTrue(result);
         }
 
         /// <summary>
-        /// Поля содержащие фамилию/имя/отчество - введено имя на английском
+        /// Поля содержащие паспортные данные - данные введены слитно
         /// Ожидается false
         /// </summary>
         [TestMethod]
-        public void TestCorrectFIOCheck_False()
+        public void TestCorrectStringPassportDataCheck_False()
         {
             // Arrange
-            string text = "Ivan";
+            string text = "4231432564";
             // Act
             TestLibrary library = new TestLibrary();
-            bool result = library.StringFIOCheck(text);
+            bool result = library.StringPassportDataCheck(text);
             // Assert
             Assert.IsFalse(result);
         }
 
         /// <summary>
-        /// Поля содержащие фамилию/имя/отчество - имя введено с цифрами
+        /// Поля содержащие паспортные данные - данные содержат буквы
         /// Ожидается false
         /// </summary>
         [TestMethod]
-        public void TestCorrectFIOCheck_False2()
+        public void TestCorrectStringPassportDataCheck_False2()
         {
             // Arrange
-            string text = "Иван2005";
+            string text = "42З1 В325Б4";
             // Act
             TestLibrary library = new TestLibrary();
-            bool result = library.StringFIOCheck(text);
+            bool result = library.StringPassportDataCheck(text);
             // Assert
             Assert.IsFalse(result);
         }

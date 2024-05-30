@@ -254,8 +254,6 @@
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
     <Resource Include="Assets\AuthCar.png" />
-    <Resource Include="Assets\CarSilhouette.png" />
-    <Resource Include="Assets\MPageCars.png" />
     <Resource Include="Assets\ico.png" />
     <Resource Include="Assets\LogoCar.png" />
     <Resource Include="Assets\edit.png" />

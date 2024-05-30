@@ -63,9 +63,9 @@ namespace RentacarApp.View
                 {
                     try
                     {
+                        CarsVM carsVM = new CarsVM();
                         var selectedCars = ((Cars)DataGridCars.SelectedItem).IDCars;
                         idCar = selectedCars;
-                        CarsVM carsVM = new CarsVM(); 
                         carsVM.DeleteCar(idCar); 
                         MessageBox.Show("Автомобиль удален");
                         DataGridCars.ItemsSource = db.context.Cars.ToList(); 
@@ -88,11 +88,11 @@ namespace RentacarApp.View
         {
             try
             {
-                CarsVM CarVM = new CarsVM();
-                bool checker = CarVM.CheckCar(ModelTextBox.Text, ColorTextBox.Text, RegNumberTextBox.Text, AvailabilityComboBox.SelectedValue);
+                CarsVM carsVM = new CarsVM();
+                bool checker = carsVM.CheckCar(ModelTextBox.Text, ColorTextBox.Text, RegNumberTextBox.Text, AvailabilityComboBox.SelectedValue);
                 if (checker)
                 {
-                    CarVM.AddCar(ModelTextBox.Text, Convert.ToDateTime(CarProdYearDatePicker.SelectedDate), ColorTextBox.Text, RegNumberTextBox.Text, (int)AvailabilityComboBox.SelectedValue);
+                    carsVM.AddCar(ModelTextBox.Text, Convert.ToDateTime(CarProdYearDatePicker.SelectedDate), ColorTextBox.Text, RegNumberTextBox.Text, (int)AvailabilityComboBox.SelectedValue);
                     MessageBox.Show("Автомобиль добавлен");
                     DataGridCars.ItemsSource = db.context.Cars.ToList();
                 }
@@ -113,17 +113,9 @@ namespace RentacarApp.View
                 db.context.Entry(EditRow).State = EntityState.Modified;
                 db.context.SaveChanges();
 
-                Logs addLogs = new Logs()
-                {
-                    IDUsers = Properties.Settings.Default.idUser,
-                    LogTime = DateTime.Now,
-                    ActionID = 2,
-                    TableName = "Автомобили"
-                };
-                db.context.Logs.Add(addLogs);
-                db.context.SaveChanges();
+                CarsVM carsVM = new CarsVM();
+                carsVM.AddLog_Edit();
             }
-
         }
     }
 }

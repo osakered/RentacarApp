@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using RentacarApp;
+using RentacarApp.Models;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace RentacarTests.Library
@@ -22,9 +25,8 @@ namespace RentacarTests.Library
         /// </returns>
         public bool StringTextCheck(string text)
         {
-            string Symbols = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяabcdefghijklmnopqrstuvwxyz";
-            text = text.ToLower();
-            if (!text.All(x => Symbols.Contains(x)))
+            Regex r = new Regex(@"[a-zA-Zа-яА-ЯЁё\s]$");
+            if (!r.IsMatch(text))
             {
                 return false;
             }
@@ -38,20 +40,19 @@ namespace RentacarTests.Library
         /// <summary>
         /// Проверка поля государственного номера автомобиля
         /// </summary>
-        /// <param name="text"></param>
+        /// <param name="regnum"></param>
         /// <returns>
         /// true - истина
         /// exception - ошибка
         /// </returns>
-        public bool StringRegNumberCheck(string text)
+        public bool StringRegNumberCheck(string regnum)
         {
-            string pattern = @"^[АВЕКМНОРСТУХ][0-9]{3}[АВЕКМНОРСТУХ]{2}[-][0-9]{2,3}$";
-            Regex r = new Regex(pattern);
-            if (!r.IsMatch(text))
+            Regex r = new Regex(@"^[АВЕКМНОРСТУХ][0-9]{3}[АВЕКМНОРСТУХ]{2}[-][0-9]{2,3}$");
+            if (!r.IsMatch(regnum))
             {
                 return false;
             }
-            if (text == String.Empty)
+            if (regnum == String.Empty)
             {
                 return false;
             }
@@ -61,7 +62,7 @@ namespace RentacarTests.Library
         /// <summary>
         /// Проверка корректности ввода номера телефона
         /// </summary>
-        /// <param name="phone">Номер телефона</param>
+        /// <param name="phone"></param>
         /// <returns>
         /// true - в случае корректного ввода
         /// throw - в случае ввода некорректных данных
@@ -102,9 +103,7 @@ namespace RentacarTests.Library
         /// </returns>
         public bool DigitTextCheck(string numbers)
         {
-            string digit = "1234567890";
-            numbers = numbers.ToLower();
-            if (!numbers.All(x => digit.Contains(x)))
+            if (!numbers.All(char.IsDigit))
             {
                 return false;
             }
@@ -125,8 +124,7 @@ namespace RentacarTests.Library
         /// </returns>
         public bool StringLicenseNumberCheck(string licensenumber)
         {
-            string pattern = @"[0-9]{6}[-][0-9]{2}";
-            Regex r = new Regex(pattern);
+            Regex r = new Regex(@"[0-9]{6}[-][0-9]{2}");
             if (!r.IsMatch(licensenumber))
             {
                 return false;
@@ -139,26 +137,249 @@ namespace RentacarTests.Library
         }
 
         /// <summary>
-        /// Проверка ввода Имени/Фамилии/Отчества на правильность
+        /// Проверка паспортных данных
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="passportdata"></param>
         /// <returns>
         /// true - истина
         /// exception - ошибка
         /// </returns>
-        public bool StringFIOCheck(string name)
+        public bool StringPassportDataCheck(string passportdata)
         {
-            string pattern = @"^[а-яёA-ЯЁ]+-?[а-яёА-ЯЁ]+$";
-            Regex r = new Regex(pattern);
-            if (!r.IsMatch(name))
+            Regex r = new Regex(@"[0-9]{4}[\s][0-9]{6}");
+            if (!r.IsMatch(passportdata))
             {
                 return false;
             }
-            if (name == String.Empty)
+            if (passportdata == String.Empty)
             {
                 return false;
             }
             return true;
+        }
+
+        /// <summary>
+        /// Метод используется в тестировании приложения на добавление авто
+        /// </summary>
+        public static bool CheckAddCar(string carmodel, DateTime carprodyear, string carcolor, string regnumber, int idavailability)
+        {
+            Core db = new Core();
+            try
+            {
+                Cars addCars = new Cars()
+                {
+                    CarModel = carmodel,
+                    CarProdYear = carprodyear,
+                    CarColor = carcolor,
+                    RegNumber = regnumber,
+                    IDAvailability = idavailability
+                };
+
+                db.context.Cars.Add(addCars);
+                db.context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Метод используется в тестировании приложения на удаление авто
+        /// </summary>
+        public static bool CheckDelCar(int idcar)
+        {
+            Core db = new Core();
+            try
+            {
+                Cars delCar = db.context.Cars.FirstOrDefault(x => x.IDCars == idcar);
+
+                db.context.Cars.Remove(delCar);
+                db.context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Метод используется в тестировании приложения на добавление данных аренды
+        /// </summary>
+        public static bool CheckAddRental(int idclient, int idcar, string cost, DateTime datestart, DateTime dateend)
+        {
+            Core db = new Core();
+            try
+            {
+                Rental addRental = new Rental()
+                {
+                    IDClients = idclient,
+                    IDCars = idcar,
+                    Cost = Convert.ToDecimal(cost),
+                    DateStart = datestart,
+                    DateEnd = dateend
+                };
+                db.context.Rental.Add(addRental);
+                db.context.SaveChanges();
+                return true;
+            }
+            catch 
+            { 
+                return false; 
+            }
+        }
+
+        /// <summary>
+        /// Метод используется в тестировании приложения на удаление данных аренды
+        /// </summary>
+        public static bool CheckDelRental(int idrent)
+        {
+            Core db = new Core();
+            try
+            {
+                Rental delRent = db.context.Rental.FirstOrDefault(x => x.IDRent == idrent);
+                db.context.Rental.Remove(delRent);
+                db.context.SaveChanges();
+                return true;
+            }
+            catch 
+            { 
+                return false; 
+            }
+        }
+
+        /// <summary>
+        /// Метод используется в тестировании приложения на добавление данных об обслуживании
+        /// </summary>
+        public static bool CheckAddUpkeep(int idcars, DateTime beginupkeepdate, DateTime endupkeepdate, string price)
+        {
+            Core db = new Core();
+            try
+            {
+                Upkeep addUpkeep = new Upkeep()
+                {
+                    IDCars = idcars,
+                    BeginUpkeepDate = beginupkeepdate,
+                    EndUpkeepDate = endupkeepdate,
+                    Price = Convert.ToDecimal(price)
+                };
+                db.context.Upkeep.Add(addUpkeep);
+                db.context.SaveChanges();
+                return true;
+            }
+            catch 
+            { 
+                return false; 
+            }
+        }
+
+        /// <summary>
+        /// Метод используется в тестировании приложения на удаление данных об обслуживании
+        /// </summary>
+        public static bool CheckDelUpkeep(int idupkeep)
+        {
+            Core db = new Core();
+            try
+            {
+                Upkeep delUpkeep = db.context.Upkeep.FirstOrDefault(x => x.IDUpkeep == idupkeep);
+                db.context.Upkeep.Remove(delUpkeep);
+                db.context.SaveChanges();
+                return true;
+            }
+            catch 
+            { 
+                return false; 
+            }
+        }
+
+        /// <summary>
+        /// Метод используется в тестировании приложения на добавление клиента
+        /// </summary>
+        public static bool CheckAddClients(string address, string passportdata, string fullname, string dlicensenumber, string phonenumber)
+        {
+            Core db = new Core();
+            try
+            {
+                Clients addClients = new Clients()
+                {
+                    Address = address,
+                    PassportData = passportdata,
+                    FullName = fullname,
+                    DLicenseNumber = dlicensenumber,
+                    PhoneNumber = phonenumber
+                };
+                db.context.Clients.Add(addClients);
+                db.context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Метод используется в тестировании приложения на удаление клиента
+        /// </summary>
+        public static bool CheckDelClients(int idclient)
+        {
+            Core db = new Core();
+            try
+            {
+                Clients delClient = db.context.Clients.FirstOrDefault(x => x.IDClients == idclient);
+                db.context.Clients.Remove(delClient);
+                db.context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Метод используется в тестировании приложения на добавление пользователя
+        /// </summary>
+        public static bool CheckAddUsers(string username, string password, int idrole)
+        {
+            Core db = new Core();
+            try
+            {
+                Users addUsers = new Users()
+                {
+                    Username = username,
+                    Password = password,
+                    IDRole = idrole
+                };
+                db.context.Users.Add(addUsers);
+                db.context.SaveChanges();
+                return true;
+            }
+            catch 
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Метод используется в тестировании приложения на удаление пользователя
+        /// </summary>
+        public static bool CheckDelUsers(int iduser)
+        {
+            Core db = new Core();
+            try
+            {
+                Users delUser = db.context.Users.FirstOrDefault(x => x.IDUsers == iduser);
+                db.context.Users.Remove(delUser);
+                db.context.SaveChanges();
+                return true;
+            }
+            catch 
+            {
+                return false;
+            }
         }
     }
 }

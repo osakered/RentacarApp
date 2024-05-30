@@ -98,14 +98,8 @@ namespace RentacarApp.View
                 db.context.Entry(EditRow).State = EntityState.Modified;
                 db.context.SaveChanges();
 
-                Logs addLogs = new Logs()
-                {
-                    IDUsers = Properties.Settings.Default.idUser,
-                    LogTime = DateTime.Now,
-                    ActionID = 2,
-                    TableName = "Пользователи"
-                };
-                db.context.Logs.Add(addLogs);
+                UsersVM usersVM = new UsersVM();
+                usersVM.AddLog_Edit();
             }
         }
     }

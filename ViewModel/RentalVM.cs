@@ -88,5 +88,18 @@ namespace RentacarApp.ViewModel
             db.context.Rental.Remove(delRent);
             db.context.SaveChanges();
         }
+
+        public void AddLog_Edit()
+        {
+            Logs addLogs = new Logs()
+            {
+                IDUsers = Properties.Settings.Default.idUser,
+                LogTime = DateTime.Now,
+                ActionID = 2,
+                TableName = "Аренда"
+            };
+            db.context.Logs.Add(addLogs);
+            db.context.SaveChanges();
+        }
     }
 }
