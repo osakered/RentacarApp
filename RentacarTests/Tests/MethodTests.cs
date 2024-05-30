@@ -67,7 +67,7 @@ namespace RentacarTests
         [TestMethod()]
         public void TestingDelCar()
         {
-            bool cars = TestLibrary.CheckDelCar(13);
+            bool cars = TestLibrary.CheckDelCar(14);
 
             Assert.IsTrue(cars);
         }
@@ -89,7 +89,7 @@ namespace RentacarTests
         [TestMethod()]
         public void TestingDelRental()
         {
-            bool rental = TestLibrary.CheckDelRental(6);
+            bool rental = TestLibrary.CheckDelRental(5);
 
             Assert.IsTrue(rental);
         }
@@ -133,7 +133,7 @@ namespace RentacarTests
         [TestMethod()]
         public void TestingDelClient()
         {
-            bool client = TestLibrary.CheckDelClients(4);
+            bool client = TestLibrary.CheckDelClients(6);
 
             Assert.IsTrue(client);
         }
