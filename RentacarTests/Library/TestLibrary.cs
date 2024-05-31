@@ -18,11 +18,6 @@ namespace RentacarTests.Library
         /// <summary>
         /// Проверка строки текстового поля
         /// </summary>
-        /// <param name="text"></param>
-        /// <returns>
-        /// true - истина
-        /// exception - ошибка
-        /// </returns>
         public bool StringTextCheck(string text)
         {
             Regex r = new Regex(@"[a-zA-Zа-яА-ЯЁё\s]$");
@@ -40,11 +35,6 @@ namespace RentacarTests.Library
         /// <summary>
         /// Проверка поля государственного номера автомобиля
         /// </summary>
-        /// <param name="regnum"></param>
-        /// <returns>
-        /// true - истина
-        /// exception - ошибка
-        /// </returns>
         public bool StringRegNumberCheck(string regnum)
         {
             Regex r = new Regex(@"^[АВЕКМНОРСТУХ][0-9]{3}[АВЕКМНОРСТУХ]{2}[-][0-9]{2,3}$");
@@ -62,11 +52,6 @@ namespace RentacarTests.Library
         /// <summary>
         /// Проверка корректности ввода номера телефона
         /// </summary>
-        /// <param name="phone"></param>
-        /// <returns>
-        /// true - в случае корректного ввода
-        /// throw - в случае ввода некорректных данных
-        /// </returns>
         public bool PhoneCheck(string phone)
         {
             string phonenumber = "1234567890+-";
@@ -96,11 +81,6 @@ namespace RentacarTests.Library
         /// <summary>
         /// Проверка числового поля
         /// </summary>
-        /// <param name="numbers"></param>
-        /// <returns>
-        /// true - истина
-        /// exception - ошибка
-        /// </returns>
         public bool DigitTextCheck(string numbers)
         {
             if (!numbers.All(char.IsDigit))
@@ -117,11 +97,6 @@ namespace RentacarTests.Library
         /// <summary>
         /// Проверка номера водительского удостоверения
         /// </summary>
-        /// <param name="licensenumber"></param>
-        /// <returns>
-        /// true - истина
-        /// exception - ошибка
-        /// </returns>
         public bool StringLicenseNumberCheck(string licensenumber)
         {
             Regex r = new Regex(@"[0-9]{6}[-][0-9]{2}");
@@ -139,11 +114,6 @@ namespace RentacarTests.Library
         /// <summary>
         /// Проверка паспортных данных
         /// </summary>
-        /// <param name="passportdata"></param>
-        /// <returns>
-        /// true - истина
-        /// exception - ошибка
-        /// </returns>
         public bool StringPassportDataCheck(string passportdata)
         {
             Regex r = new Regex(@"[0-9]{4}[\s][0-9]{6}");

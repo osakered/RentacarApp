@@ -17,6 +17,13 @@ namespace RentacarApp.ViewModel
     {
         Core db = new Core();
 
+        /// <summary>
+        /// Добавление пользователя в базу данных
+        /// Фиксация добавления в журнал действий
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="idrole"></param>
         public void AddUsers(string username, string password, int idrole)
         {
             Logs addLogs = new Logs()
@@ -39,6 +46,14 @@ namespace RentacarApp.ViewModel
             db.context.SaveChanges();
         }
 
+        /// <summary>
+        /// Проверка полей ввода на корректные данные
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="idrole"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public bool CheckUsers(string username, string password, object idrole)
         {
             if (String.IsNullOrEmpty(username) && String.IsNullOrEmpty(password) && idrole == null)
@@ -68,6 +83,11 @@ namespace RentacarApp.ViewModel
             }
         }
 
+        /// <summary>
+        /// Удаление пользователя из базы данных
+        /// Фиксация удаления в журнал действий
+        /// </summary>
+        /// <param name="idUser"></param>
         public void DeleteUser(int idUser)
         {
             Logs addLogs = new Logs()
@@ -85,6 +105,9 @@ namespace RentacarApp.ViewModel
             db.context.SaveChanges();
         }
 
+        /// <summary>
+        /// Фиксация редактирования в журнал действий
+        /// </summary>
         public void AddLog_Edit()
         {
             Logs addLogs = new Logs()

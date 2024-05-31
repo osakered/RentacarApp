@@ -17,6 +17,14 @@ namespace RentacarApp.ViewModel
     {
         Core db = new Core();
 
+        /// <summary>
+        /// Добавление данных об обслуживании в базу данных
+        /// Фиксация добавления в журнал 
+        /// </summary>
+        /// <param name="idcars"></param>
+        /// <param name="beginupkeepdate"></param>
+        /// <param name="endupkeepdate"></param>
+        /// <param name="price"></param>
         public void AddUpkeep(int idcars, DateTime beginupkeepdate, DateTime endupkeepdate, string price)
         {
             Logs addLogs = new Logs()
@@ -40,6 +48,15 @@ namespace RentacarApp.ViewModel
             db.context.SaveChanges();
         }
 
+        /// <summary>
+        /// Проверка полей ввода на корректные данные
+        /// </summary>
+        /// <param name="car"></param>
+        /// <param name="cost"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public bool CheckUpkeep(object car, string cost, DateTime start, DateTime end)
         {
             if (car == null && String.IsNullOrEmpty(cost))
@@ -68,6 +85,11 @@ namespace RentacarApp.ViewModel
             }
         }
 
+        /// <summary>
+        /// Удаление данных об обслуживании из базы данных
+        /// Фиксация удаления в журнал действий
+        /// </summary>
+        /// <param name="idUpkeep"></param>
         public void DeleteUpkeep(int idUpkeep)
         {
             Logs addLogs = new Logs()
@@ -85,6 +107,9 @@ namespace RentacarApp.ViewModel
             db.context.SaveChanges();
         }
 
+        /// <summary>
+        /// Фиксация редактирования в журнал действий
+        /// </summary>
         public void AddLog_Edit()
         {
             Logs addLogs = new Logs()

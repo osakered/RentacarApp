@@ -17,7 +17,15 @@ namespace RentacarApp.ViewModel
     internal class ClientsVM
     {
         Core db = new Core();
-
+        /// <summary>
+        /// Добавление клиента в базу данных
+        /// Фиксация добавления в журнал действий
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="passportdata"></param>
+        /// <param name="fullname"></param>
+        /// <param name="dlicensenumber"></param>
+        /// <param name="phonenumber"></param>
         public void AddClients(string address, string passportdata, string fullname, string dlicensenumber, string phonenumber)
         {
             Logs addLogs = new Logs()
@@ -41,6 +49,12 @@ namespace RentacarApp.ViewModel
             db.context.Clients.Add(addClients);
             db.context.SaveChanges();
         }
+
+        /// <summary>
+        /// Проверка корректного ввода номера телефона
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <returns></returns>
         public bool PhoneCheck(string phone)
         {
             string phonenumber = "1234567890+-";
@@ -67,6 +81,16 @@ namespace RentacarApp.ViewModel
             return true;
         }
 
+        /// <summary>
+        /// Проверка полей ввода на корректные данные
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="passportdata"></param>
+        /// <param name="fullname"></param>
+        /// <param name="dlicensenumber"></param>
+        /// <param name="phonenumber"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public bool CheckClients(string address, string passportdata, string fullname, string dlicensenumber, string phonenumber)
         {
             if (String.IsNullOrEmpty(address) && String.IsNullOrEmpty(passportdata) && String.IsNullOrEmpty(fullname) && String.IsNullOrEmpty(dlicensenumber) && String.IsNullOrEmpty(phonenumber))
@@ -114,6 +138,11 @@ namespace RentacarApp.ViewModel
             }
         }
 
+        /// <summary>
+        /// Удаление клиента из базы данных
+        /// Фиксация удаления в журнал действий
+        /// </summary>
+        /// <param name="idClient"></param>
         public void DeleteClient(int idClient)
         {
             Logs addLogs = new Logs()
@@ -131,6 +160,9 @@ namespace RentacarApp.ViewModel
             db.context.SaveChanges();
         }
 
+        /// <summary>
+        /// Фиксация редактирования в журнал действий
+        /// </summary>
         public void AddLog_Edit()
         {
             Logs addLogs = new Logs()

@@ -51,7 +51,7 @@ namespace RentacarTests
         }
 
         /// <summary>
-        /// Тест проверки добавления авто
+        /// Тест добавления авто
         /// </summary>
         [TestMethod()]
         public void TestingAddCar_ReturnTrue()
@@ -62,7 +62,7 @@ namespace RentacarTests
         }
 
         /// <summary>
-        /// Тест проверки удаления авто
+        /// Тест удаления авто
         /// </summary>
         [TestMethod()]
         public void TestingDelCar()
@@ -73,7 +73,7 @@ namespace RentacarTests
         }
 
         /// <summary>
-        /// Тест проверки добавления аренды
+        /// Тест добавления аренды
         /// </summary>
         [TestMethod()]
         public void TestingAddRental_ReturnTrue()
@@ -84,7 +84,7 @@ namespace RentacarTests
         }
 
         /// <summary>
-        /// Тест проверки удаления аренды
+        /// Тест удаления аренды
         /// </summary>
         [TestMethod()]
         public void TestingDelRental()
@@ -95,7 +95,7 @@ namespace RentacarTests
         }
 
         /// <summary>
-        /// Тест проверки добавления обслуживания
+        /// Тест добавления обслуживания
         /// </summary>
         [TestMethod()]
         public void TestingAddUpkeep_ReturnTrue()
@@ -106,7 +106,7 @@ namespace RentacarTests
         }
 
         /// <summary>
-        /// Тест проверки удаления обслуживания
+        /// Тест удаления обслуживания
         /// </summary>
         [TestMethod()]
         public void TestingDelUpkeep()
@@ -117,7 +117,7 @@ namespace RentacarTests
         }
 
         /// <summary>
-        /// Тест проверки добавления клиента
+        /// Тест добавления клиента
         /// </summary>
         [TestMethod()]
         public void TestingAddClient_ReturnTrue()
@@ -128,7 +128,7 @@ namespace RentacarTests
         }
 
         /// <summary>
-        /// Тест проверки удаления клиента
+        /// Тест удаления клиента
         /// </summary>
         [TestMethod()]
         public void TestingDelClient()
@@ -139,7 +139,7 @@ namespace RentacarTests
         }
 
         /// <summary>
-        /// Тест проверки добавления пользователя
+        /// Тест добавления пользователя
         /// </summary>
         [TestMethod()]
         public void TestingAddUser_ReturnTrue()
@@ -150,7 +150,7 @@ namespace RentacarTests
         }
 
         /// <summary>
-        /// Тест проверки удаления пользователя
+        /// Тест удаления пользователя
         /// </summary>
         [TestMethod()]
         public void TestingDelUser()

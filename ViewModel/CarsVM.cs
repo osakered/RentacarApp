@@ -19,6 +19,15 @@ namespace RentacarApp.ViewModel
     {
         Core db = new Core();
 
+        /// <summary>
+        /// Добавление автомобиля в базу данных
+        /// Фиксация добавления в журнал действий
+        /// </summary>
+        /// <param name="carmodel"></param>
+        /// <param name="carprodyear"></param>
+        /// <param name="carcolor"></param>
+        /// <param name="regnumber"></param>
+        /// <param name="idavailability"></param>
         public void AddCar(string carmodel, DateTime carprodyear, string carcolor, string regnumber, int idavailability)
         {
             Logs addLogs = new Logs()
@@ -43,6 +52,15 @@ namespace RentacarApp.ViewModel
             db.context.SaveChanges();
         }
 
+        /// <summary>
+        /// Проверка полей ввода на корректные данные
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="color"></param>
+        /// <param name="regnumber"></param>
+        /// <param name="availability"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public bool CheckCar(string model, string color, string regnumber, object availability) 
         {
             if (String.IsNullOrEmpty(model) && String.IsNullOrEmpty(color) && String.IsNullOrEmpty(regnumber) && availability == null)
@@ -76,6 +94,11 @@ namespace RentacarApp.ViewModel
             }
         }
 
+        /// <summary>
+        /// Удаление автомобиля из базы данных
+        /// Фиксация удаления в журнал действий
+        /// </summary>
+        /// <param name="idCar"></param>
         public void DeleteCar(int idCar) 
         {
             Logs addLogs = new Logs()
@@ -94,6 +117,9 @@ namespace RentacarApp.ViewModel
             db.context.SaveChanges();
         }
 
+        /// <summary>
+        /// Фиксация редактирования в журнал действий
+        /// </summary>
         public void AddLog_Edit()
         {
             Logs addLogs = new Logs()
