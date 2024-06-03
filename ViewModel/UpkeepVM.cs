@@ -21,10 +21,10 @@ namespace RentacarApp.ViewModel
         /// Добавление данных об обслуживании в базу данных
         /// Фиксация добавления в журнал 
         /// </summary>
-        /// <param name="idcars"></param>
-        /// <param name="beginupkeepdate"></param>
-        /// <param name="endupkeepdate"></param>
-        /// <param name="price"></param>
+        /// <param name="idcars">Идентификатор авто</param>
+        /// <param name="beginupkeepdate">Начало обслуживания</param>
+        /// <param name="endupkeepdate">Конец обслуживания</param>
+        /// <param name="price">Цена</param>
         public void AddUpkeep(int idcars, DateTime beginupkeepdate, DateTime endupkeepdate, string price)
         {
             Logs addLogs = new Logs()
@@ -51,10 +51,10 @@ namespace RentacarApp.ViewModel
         /// <summary>
         /// Проверка полей ввода на корректные данные
         /// </summary>
-        /// <param name="car"></param>
-        /// <param name="cost"></param>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
+        /// <param name="car">Авто</param>
+        /// <param name="cost">Стоимость</param>
+        /// <param name="start">Начало</param>
+        /// <param name="end">Конец</param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
         public bool CheckUpkeep(object car, string cost, DateTime start, DateTime end)
@@ -89,7 +89,7 @@ namespace RentacarApp.ViewModel
         /// Удаление данных об обслуживании из базы данных
         /// Фиксация удаления в журнал действий
         /// </summary>
-        /// <param name="idUpkeep"></param>
+        /// <param name="idUpkeep">Идентификатор обслуживания</param>
         public void DeleteUpkeep(int idUpkeep)
         {
             Logs addLogs = new Logs()

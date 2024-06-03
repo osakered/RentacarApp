@@ -21,9 +21,9 @@ namespace RentacarApp.ViewModel
         /// Добавление пользователя в базу данных
         /// Фиксация добавления в журнал действий
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="idrole"></param>
+        /// <param name="username">Логин</param>
+        /// <param name="password">Пароль</param>
+        /// <param name="idrole">Идентификатор роли</param>
         public void AddUsers(string username, string password, int idrole)
         {
             Logs addLogs = new Logs()
@@ -49,9 +49,9 @@ namespace RentacarApp.ViewModel
         /// <summary>
         /// Проверка полей ввода на корректные данные
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="idrole"></param>
+        /// <param name="username">Логин</param>
+        /// <param name="password">Пароль</param>
+        /// <param name="idrole">Идентификатор роли</param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
         public bool CheckUsers(string username, string password, object idrole)
@@ -87,7 +87,7 @@ namespace RentacarApp.ViewModel
         /// Удаление пользователя из базы данных
         /// Фиксация удаления в журнал действий
         /// </summary>
-        /// <param name="idUser"></param>
+        /// <param name="idUser">Идентификатор пользователя</param>
         public void DeleteUser(int idUser)
         {
             Logs addLogs = new Logs()

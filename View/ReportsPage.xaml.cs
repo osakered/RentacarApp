@@ -24,6 +24,9 @@ namespace RentacarApp.View
     public partial class ReportsPage : Page
     {
         Core db = new Core();
+        List<Rental> rental = new List<Rental>();
+        List<Rental> rental2 = new List<Rental>();
+        List<Cars> cars = new List<Cars>();
         public ReportsPage()
         {
             InitializeComponent();
@@ -47,6 +50,29 @@ namespace RentacarApp.View
         {
             var filepath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Report.csv");
 
+            rental = db.context.Rental.ToList();
+            decimal avg = 0;
+            foreach (Rental r in rental)
+            {
+                avg = avg + r.Cost; 
+            }
+            avg = avg / rental.Count;
+            decimal avgRound = Math.Round(avg, 2);
+
+            DateTime month = DateTime.Today.AddDays(-30);
+            rental2 = db.context.Rental.Where(x => x.DateStart >= month).ToList();
+            decimal avgMon = 0;
+            foreach (Rental rr in rental2)
+            {
+                avgMon = avgMon + rr.Cost;
+            }
+            avgMon = avgMon / rental2.Count;
+            decimal avgMonRound = Math.Round(avgMon, 2);
+
+            cars = db.context.Cars.ToList();
+            int carCount = 0;
+            carCount = 100 - cars.Count; //Допустим размер автопарка составляет 100 мест
+
             using (StreamWriter sw = new StreamWriter(filepath, false, Encoding.UTF8))
             {
                 sw.WriteLine("Модель;Год выпуска;Цвет;Госномер;Статус");
@@ -55,8 +81,11 @@ namespace RentacarApp.View
                 {
                     var row = (Cars)item;
 
-                    sw.WriteLine($"{row.CarModel};{row.CarProdYear};{row.CarColor};{row.RegNumber};{row.Availability.AvailabilityState}");
+                    sw.WriteLine($"{row.CarModel};{row.CarProdYear};{row.CarColor};{row.RegNumber};{row.Availability.AvailabilityState};");
                 }
+                sw.Write("Средний доход за все время = " + avgRound + " рублей\n");
+                sw.Write("Средний доход за прошлый месяц = " + avgMonRound + " рублей\n");
+                sw.Write("Осталось мест в автопарке = " + carCount);
                 MessageBox.Show("Данные успешно сохранены на рабочем столе, возвращение на главную страницу.");
                 this.NavigationService.GoBack();
             }

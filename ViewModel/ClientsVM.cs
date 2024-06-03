@@ -21,11 +21,11 @@ namespace RentacarApp.ViewModel
         /// Добавление клиента в базу данных
         /// Фиксация добавления в журнал действий
         /// </summary>
-        /// <param name="address"></param>
-        /// <param name="passportdata"></param>
-        /// <param name="fullname"></param>
-        /// <param name="dlicensenumber"></param>
-        /// <param name="phonenumber"></param>
+        /// <param name="address">Адрес</param>
+        /// <param name="passportdata">Паспортные данные</param>
+        /// <param name="fullname">ФИО</param>
+        /// <param name="dlicensenumber">Номер водительского удостоверения</param>
+        /// <param name="phonenumber">Номер телефона</param>
         public void AddClients(string address, string passportdata, string fullname, string dlicensenumber, string phonenumber)
         {
             Logs addLogs = new Logs()
@@ -53,7 +53,7 @@ namespace RentacarApp.ViewModel
         /// <summary>
         /// Проверка корректного ввода номера телефона
         /// </summary>
-        /// <param name="phone"></param>
+        /// <param name="phone">Номер телефона</param>
         /// <returns></returns>
         public bool PhoneCheck(string phone)
         {
@@ -84,11 +84,11 @@ namespace RentacarApp.ViewModel
         /// <summary>
         /// Проверка полей ввода на корректные данные
         /// </summary>
-        /// <param name="address"></param>
-        /// <param name="passportdata"></param>
-        /// <param name="fullname"></param>
-        /// <param name="dlicensenumber"></param>
-        /// <param name="phonenumber"></param>
+        /// <param name="address">Адрес</param>
+        /// <param name="passportdata">Паспортные данные</param>
+        /// <param name="fullname">ФИО</param>
+        /// <param name="dlicensenumber">Номер водительского удостоверения</param>
+        /// <param name="phonenumber">Номер телефона</param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
         public bool CheckClients(string address, string passportdata, string fullname, string dlicensenumber, string phonenumber)
@@ -142,7 +142,7 @@ namespace RentacarApp.ViewModel
         /// Удаление клиента из базы данных
         /// Фиксация удаления в журнал действий
         /// </summary>
-        /// <param name="idClient"></param>
+        /// <param name="idClient">Идентификатор клиента</param>
         public void DeleteClient(int idClient)
         {
             Logs addLogs = new Logs()

@@ -23,11 +23,11 @@ namespace RentacarApp.ViewModel
         /// Добавление автомобиля в базу данных
         /// Фиксация добавления в журнал действий
         /// </summary>
-        /// <param name="carmodel"></param>
-        /// <param name="carprodyear"></param>
-        /// <param name="carcolor"></param>
-        /// <param name="regnumber"></param>
-        /// <param name="idavailability"></param>
+        /// <param name="carmodel">Модель авто</param>
+        /// <param name="carprodyear">Дата выпуска авто</param>
+        /// <param name="carcolor">Цвет авто</param>
+        /// <param name="regnumber">Госномер авто</param>
+        /// <param name="idavailability">Идентификатор доступности</param>
         public void AddCar(string carmodel, DateTime carprodyear, string carcolor, string regnumber, int idavailability)
         {
             Logs addLogs = new Logs()
@@ -55,10 +55,10 @@ namespace RentacarApp.ViewModel
         /// <summary>
         /// Проверка полей ввода на корректные данные
         /// </summary>
-        /// <param name="model"></param>
-        /// <param name="color"></param>
-        /// <param name="regnumber"></param>
-        /// <param name="availability"></param>
+        /// <param name="model">Модель</param>
+        /// <param name="color">Цвет</param>
+        /// <param name="regnumber">Госномер</param>
+        /// <param name="availability">Доступность</param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
         public bool CheckCar(string model, string color, string regnumber, object availability) 
@@ -98,7 +98,7 @@ namespace RentacarApp.ViewModel
         /// Удаление автомобиля из базы данных
         /// Фиксация удаления в журнал действий
         /// </summary>
-        /// <param name="idCar"></param>
+        /// <param name="idCar">Идентификатор авто</param>
         public void DeleteCar(int idCar) 
         {
             Logs addLogs = new Logs()

@@ -7,13 +7,17 @@ using RentacarApp.Models;
 
 namespace RentacarApp.ViewModel
 {
-    /// <summary>
-    /// Класс проверок страницы авторизации на корректный ввод данных
-    /// </summary>
     public static class AuthVM
     {
         public static Core db = new Core();
 
+        /// <summary>
+        /// Проверка авторизации на корректный ввод данных
+        /// </summary>
+        /// <param name="username">Логин</param>
+        /// <param name="password">Пароль</param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static bool CheckAuth(string username, string password)
         {
             if (String.IsNullOrWhiteSpace(username) && String.IsNullOrWhiteSpace(password))

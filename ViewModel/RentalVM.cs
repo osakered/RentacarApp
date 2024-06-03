@@ -20,11 +20,11 @@ namespace RentacarApp.ViewModel
         /// Добавление данных об аренде в базу данных
         /// Фиксация добавления в журнал действий
         /// </summary>
-        /// <param name="idclient"></param>
-        /// <param name="idcar"></param>
-        /// <param name="cost"></param>
-        /// <param name="datestart"></param>
-        /// <param name="dateend"></param>
+        /// <param name="idclient">Идентификатор клиента</param>
+        /// <param name="idcar">Идентификатор авто</param>
+        /// <param name="cost">Стоимость</param>
+        /// <param name="datestart">Дата начала</param>
+        /// <param name="dateend">Дата конца</param>
         public void AddRental(int idclient, int idcar, string cost, DateTime datestart, DateTime dateend)
         {
             Logs addLogs = new Logs()
@@ -52,11 +52,11 @@ namespace RentacarApp.ViewModel
         /// <summary>
         /// Проверка полей ввода на корректные данные
         /// </summary>
-        /// <param name="client"></param>
-        /// <param name="car"></param>
-        /// <param name="cost"></param>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
+        /// <param name="client">Клиент</param>
+        /// <param name="car">Авто</param>
+        /// <param name="cost">Стоимость</param>
+        /// <param name="start">Начало</param>
+        /// <param name="end">Конец</param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
         public bool CheckRental(object client, object car, string cost, DateTime start, DateTime end)
@@ -95,7 +95,7 @@ namespace RentacarApp.ViewModel
         /// Удаление данных об аренде из базы данных
         /// Фиксация добавления в журнал действий
         /// </summary>
-        /// <param name="idRent"></param>
+        /// <param name="idRent">Идентификатор аренды</param>
         public void DeleteRent(int idRent)
         {
             Logs addLogs = new Logs()
